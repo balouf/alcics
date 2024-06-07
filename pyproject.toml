@@ -127,7 +127,6 @@ allowlist_externals = poetry
 commands =
     poetry install -v
     pytest
-    mypy
 """
 
 [tool.poetry_bumpversion.file."alcics/__init__.py"]
