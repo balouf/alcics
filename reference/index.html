@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MyClass1" href="my_class_1.html" />
+    <link rel="next" title="Database" href="database.html" />
     <link rel="prev" title="Second tutorial" href="../tutorials/answer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -411,9 +411,8 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="my_class_1.html">MyClass1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="my_class_2.html">MyClass2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="my_class_3.html">MyClass3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 </div>
 </nav></div>
@@ -472,31 +471,43 @@ document.write(`
 <h1>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="my_class_1.html">MyClass1</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="my_class_1.html#alcics.MyClass1"><code class="docutils literal notranslate"><span class="pre">MyClass1</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.my_string"><code class="docutils literal notranslate"><span class="pre">MyClass1.my_string</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.A_NICE_CONSTANT"><code class="docutils literal notranslate"><span class="pre">MyClass1.A_NICE_CONSTANT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.A_VERY_NICE_CONSTANT"><code class="docutils literal notranslate"><span class="pre">MyClass1.A_VERY_NICE_CONSTANT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.a_square"><code class="docutils literal notranslate"><span class="pre">MyClass1.a_square</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.addition"><code class="docutils literal notranslate"><span class="pre">MyClass1.addition()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.divide_a_by_c_and_add_d"><code class="docutils literal notranslate"><span class="pre">MyClass1.divide_a_by_c_and_add_d()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="my_class_1.html#alcics.MyClass1.update_b_from_class_2"><code class="docutils literal notranslate"><span class="pre">MyClass1.update_b_from_class_2()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.blueprint.Author"><code class="docutils literal notranslate"><span class="pre">Author</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.blueprint.DB"><code class="docutils literal notranslate"><span class="pre">DB</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.blueprint.DB.Author"><code class="docutils literal notranslate"><span class="pre">DB.Author</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.dblp.DBLP"><code class="docutils literal notranslate"><span class="pre">DBLP</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLP.Author"><code class="docutils literal notranslate"><span class="pre">DBLP.Author</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLP.find_author"><code class="docutils literal notranslate"><span class="pre">DBLP.find_author()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLP.find_papers"><code class="docutils literal notranslate"><span class="pre">DBLP.find_papers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLP.parse_entry"><code class="docutils literal notranslate"><span class="pre">DBLP.parse_entry()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="my_class_2.html">MyClass2</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="my_class_2.html#alcics.MyClass2"><code class="docutils literal notranslate"><span class="pre">MyClass2</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="my_class_2.html#alcics.MyClass2.addition"><code class="docutils literal notranslate"><span class="pre">MyClass2.addition()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.hal.HAL"><code class="docutils literal notranslate"><span class="pre">HAL</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HAL.Author"><code class="docutils literal notranslate"><span class="pre">HAL.Author</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HAL.find_author"><code class="docutils literal notranslate"><span class="pre">HAL.find_author()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HAL.find_papers"><code class="docutils literal notranslate"><span class="pre">HAL.find_papers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HAL.parse_entry"><code class="docutils literal notranslate"><span class="pre">HAL.parse_entry()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor"><code class="docutils literal notranslate"><span class="pre">HALAuthor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.hal.parse_facet_author"><code class="docutils literal notranslate"><span class="pre">parse_facet_author()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="my_class_3.html">MyClass3</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="my_class_3.html#alcics.MyClass3"><code class="docutils literal notranslate"><span class="pre">MyClass3</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="my_class_3.html#alcics.MyClass3.addition"><code class="docutils literal notranslate"><span class="pre">MyClass3.addition()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.common.LazyRepr"><code class="docutils literal notranslate"><span class="pre">LazyRepr</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.common.get_classes"><code class="docutils literal notranslate"><span class="pre">get_classes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.common.unlist"><code class="docutils literal notranslate"><span class="pre">unlist()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.requests.auto_retry_get"><code class="docutils literal notranslate"><span class="pre">auto_retry_get()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.requests.autosession"><code class="docutils literal notranslate"><span class="pre">autosession()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO"><code class="docutils literal notranslate"><span class="pre">MixInIO</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO.dump"><code class="docutils literal notranslate"><span class="pre">MixInIO.dump()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO.load"><code class="docutils literal notranslate"><span class="pre">MixInIO.load()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.mixinio.ToyClass"><code class="docutils literal notranslate"><span class="pre">ToyClass</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -523,11 +534,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="my_class_1.html"
+       href="database.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">MyClass1</p>
+        <p class="prev-next-title">Database</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
