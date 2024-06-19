@@ -9,12 +9,18 @@ from alcics.utils.requests import autosession, auto_retry_get
 
 @dataclass(repr=False)
 class DBLPAuthor(Author):
-    pass
+
+    @property
+    def url(self):
+        return f'https://dblp.org/pid/{self.id}.html'
 
 
 class DBLP(DB):
     name = 'dblp'
     Author = DBLPAuthor
+
+    author_backoff = 7
+    papers_backoff = 2
 
     @classmethod
     def parse_entry(cls, r):

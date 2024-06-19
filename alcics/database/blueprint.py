@@ -11,6 +11,10 @@ class Author(LazyRepr):
     id: str = None
     names: list = field(default_factory=list)
 
+    @property
+    def url(self):
+        raise NotImplementedError
+
 
 class DB:
     """
