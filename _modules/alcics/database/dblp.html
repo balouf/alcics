@@ -464,7 +464,10 @@ document.write(`
 <a class="viewcode-back" href="../../../reference/database.html#alcics.database.dblp.DBLPAuthor">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">DBLPAuthor</span><span class="p">(</span><span class="n">Author</span><span class="p">):</span>
-    <span class="k">pass</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;https://dblp.org/pid/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">.html&#39;</span></div>
 
 
 
@@ -473,6 +476,9 @@ document.write(`
 <span class="k">class</span> <span class="nc">DBLP</span><span class="p">(</span><span class="n">DB</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dblp&#39;</span>
     <span class="n">Author</span> <span class="o">=</span> <span class="n">DBLPAuthor</span>
+
+    <span class="n">author_backoff</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">papers_backoff</span> <span class="o">=</span> <span class="mi">2</span>
 
 <div class="viewcode-block" id="DBLP.parse_entry">
 <a class="viewcode-back" href="../../../reference/database.html#alcics.database.dblp.DBLP.parse_entry">[docs]</a>
