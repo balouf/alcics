@@ -39,11 +39,11 @@ def get_classes(root, key='name'):
     Examples
     --------
 
-    >>> from alcics.database.blueprint import DB
-    >>> subclasses = get_classes(DB)
+    >>> from alcics.database.blueprint import DBAuthor
+    >>> subclasses = get_classes(DBAuthor, key='db_name')
     >>> dict(sorted(subclasses.items())) # doctest: +NORMALIZE_WHITESPACE
-    {'dblp': <class 'alcics.database.dblp.DBLP'>,
-    'hal': <class 'alcics.database.hal.HAL'>}
+    {'dblp': <class 'alcics.database.dblp.DBLPAuthor'>,
+    'hal': <class 'alcics.database.hal.HALAuthor'>}
     """
     result = {getattr(c, key): c for c in root.__subclasses__() if getattr(c, key)}
     for c in root.__subclasses__():
