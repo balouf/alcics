@@ -454,50 +454,50 @@ document.write(`
 <span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote_plus</span>
 
-<span class="kn">from</span> <span class="nn">alcics.database.blueprint</span> <span class="kn">import</span> <span class="n">DB</span><span class="p">,</span> <span class="n">Author</span>
-<span class="kn">from</span> <span class="nn">alcics.utils.common</span> <span class="kn">import</span> <span class="n">LazyRepr</span><span class="p">,</span> <span class="n">unlist</span>
+<span class="kn">from</span> <span class="nn">alcics.database.blueprint</span> <span class="kn">import</span> <span class="n">DBAuthor</span><span class="p">,</span> <span class="n">clean_aliases</span>
+<span class="kn">from</span> <span class="nn">alcics.utils.common</span> <span class="kn">import</span> <span class="n">unlist</span>
 <span class="kn">from</span> <span class="nn">alcics.utils.requests</span> <span class="kn">import</span> <span class="n">autosession</span><span class="p">,</span> <span class="n">auto_retry_get</span>
+
+<span class="n">HAL_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ART&#39;</span><span class="p">:</span> <span class="s1">&#39;journal&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;COMM&#39;</span><span class="p">:</span> <span class="s1">&#39;conference&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;OUV&#39;</span><span class="p">:</span> <span class="s1">&#39;book&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;COUV&#39;</span><span class="p">:</span> <span class="s1">&#39;chapter&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;THESE&#39;</span><span class="p">:</span> <span class="s1">&#39;thesis&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;UNDEFINED&#39;</span><span class="p">:</span> <span class="s1">&#39;report&#39;</span><span class="p">,</span>
+<span class="p">}</span>
 
 
 <div class="viewcode-block" id="HALAuthor">
 <a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">HALAuthor</span><span class="p">(</span><span class="n">Author</span><span class="p">):</span>
-    <span class="n">person</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">alt_persons</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span></div>
+<span class="k">class</span> <span class="nc">HALAuthor</span><span class="p">(</span><span class="n">DBAuthor</span><span class="p">):</span>
+    <span class="n">db_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hal&#39;</span>
 
+    <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">alt_pids</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://hal.science/search/index/?q=*&amp;authIdHal_s=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://hal.science/search/index/?q=*&amp;authIdPerson_i=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;https://hal.science/search/index?q=</span><span class="si">{</span><span class="n">quote_plus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
 
-<div class="viewcode-block" id="parse_facet_author">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.parse_facet_author">[docs]</a>
-<span class="k">def</span> <span class="nf">parse_facet_author</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    a: :class:`str`</span>
-<span class="sd">        Formatted APH author string from HAL API.</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    :class:`~alcics.database.hal.HALAuthor`</span>
-<span class="sd">        Sanitized version.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">hid</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_FacetSep_&#39;</span><span class="p">)</span>
-    <span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">if</span> <span class="n">pid</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">hid</span> <span class="o">=</span> <span class="n">hid</span> <span class="k">if</span> <span class="n">hid</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">HALAuthor</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="nb">id</span><span class="o">=</span><span class="n">hid</span><span class="p">,</span> <span class="n">person</span><span class="o">=</span><span class="n">pid</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">update_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update_values</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">pid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alt_pids</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">alt_pids</span>
 
-
-
-<div class="viewcode-block" id="HAL">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HAL">[docs]</a>
-<span class="k">class</span> <span class="nc">HAL</span><span class="p">(</span><span class="n">DB</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;hal&#39;</span>
-    <span class="n">Author</span> <span class="o">=</span> <span class="n">HALAuthor</span>
-
-<div class="viewcode-block" id="HAL.parse_entry">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HAL.parse_entry">[docs]</a>
+<div class="viewcode-block" id="HALAuthor.parse_entry">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.parse_entry">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">parse_entry</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -520,18 +520,17 @@ document.write(`
             <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
                 <span class="n">res</span><span class="p">[</span><span class="s1">&#39;venue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
                 <span class="k">break</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">HAL_TYPES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hal&#39;</span>
         <span class="k">return</span> <span class="n">res</span></div>
 
 
-<div class="viewcode-block" id="HAL.find_author">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HAL.find_author">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">find_author</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="HALAuthor.query_id">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.query_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">query_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        q: :class:`str`</span>
-<span class="sd">            Name of the searcher.</span>
 <span class="sd">        s: :class:`~requests.Session`, optional</span>
 <span class="sd">            Session.</span>
 
@@ -543,23 +542,42 @@ document.write(`
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 
-<span class="sd">        &gt;&gt;&gt; HAL.find_author(&quot;Fabien Mathieu&quot;)</span>
-<span class="sd">        [HALAuthor(id=&#39;fabien-mathieu&#39;, names=[&#39;Fabien Mathieu&#39;])]</span>
-<span class="sd">        &gt;&gt;&gt; HAL.find_author(&quot;Laurent Viennot&quot;) # doctest:  +NORMALIZE_WHITESPACE</span>
-<span class="sd">        [HALAuthor(id=&#39;laurentviennot&#39;, names=[&#39;Laurent Viennot&#39;]),</span>
-<span class="sd">        HALAuthor(names=[&#39;Laurent Viennot&#39;], person=1344543)]</span>
-<span class="sd">        &gt;&gt;&gt; HAL.find_author(&quot;NotaSearcherName&quot;)</span>
-<span class="sd">        []</span>
-<span class="sd">        &gt;&gt;&gt; HAL.find_author(&quot;Ana Busic&quot;)</span>
-<span class="sd">        [HALAuthor(id=&#39;anabusic&#39;, names=[&#39;Ana Bušić&#39;, &#39;Bušić Ana&#39;])]</span>
-<span class="sd">        &gt;&gt;&gt; HAL.find_author(&quot;Diego Perino&quot;) # doctest:  +NORMALIZE_WHITESPACE</span>
-<span class="sd">        [HALAuthor(names=[&#39;Diego Perino&#39;], person=847558),</span>
-<span class="sd">        HALAuthor(names=[&#39;Diego Perino&#39;], person=978810)]</span>
+<span class="sd">        &gt;&gt;&gt; fabien = HALAuthor(&quot;Fabien Mathieu&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; fabien</span>
+<span class="sd">        HALAuthor(name=&#39;Fabien Mathieu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; fabien.url</span>
+<span class="sd">        &#39;https://hal.science/search/index?q=Fabien+Mathieu&#39;</span>
+<span class="sd">        &gt;&gt;&gt; fabien.populate_id()</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; fabien</span>
+<span class="sd">        HALAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;fabien-mathieu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; fabien.url</span>
+<span class="sd">        &#39;https://hal.science/search/index/?q=*&amp;authIdHal_s=fabien-mathieu&#39;</span>
+<span class="sd">        &gt;&gt;&gt; laurent = HALAuthor(&quot;Laurent Viennot&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; laurent.query_id()</span>
+<span class="sd">        [HALAuthor(name=&#39;Laurent Viennot&#39;, id=&#39;laurentviennot&#39;), HALAuthor(name=&#39;Laurent Viennot&#39;, pid=1344543)]</span>
+<span class="sd">        &gt;&gt;&gt; unknown = HALAuthor(&quot;NotaSearcherName&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; unknown</span>
+<span class="sd">        HALAuthor(name=&#39;NotaSearcherName&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; unknown.populate_id()</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; unknown</span>
+<span class="sd">        HALAuthor(name=&#39;NotaSearcherName&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; ana = HALAuthor(&quot;Ana Busic&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; ana.populate_id()</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; ana</span>
+<span class="sd">        HALAuthor(name=&#39;Ana Busic&#39;, id=&#39;anabusic&#39;, aliases=[&#39;Ana Bušić&#39;, &#39;Bušić Ana&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; diego = HALAuthor(&quot;Diego Perino&quot;) # doctest:  +NORMALIZE_WHITESPACE</span>
+<span class="sd">        &gt;&gt;&gt; diego.query_id()</span>
+<span class="sd">        [HALAuthor(name=&#39;Diego Perino&#39;, pid=847558), HALAuthor(name=&#39;Diego Perino&#39;, pid=978810)]</span>
+<span class="sd">        &gt;&gt;&gt; HALAuthor(name=&#39;Diego Perino&#39;, pid=978810).url</span>
+<span class="sd">        &#39;https://hal.science/search/index/?q=*&amp;authIdPerson_i=978810&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">autosession</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="n">hal_api</span> <span class="o">=</span> <span class="s2">&quot;https://api.archives-ouvertes.fr/ref/author/&quot;</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;label_s&#39;</span><span class="p">,</span> <span class="s1">&#39;idHal_s&#39;</span><span class="p">,</span> <span class="s1">&#39;person_i&#39;</span><span class="p">])</span>
-        <span class="n">hal_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="n">q</span><span class="p">,</span> <span class="s1">&#39;fl&#39;</span><span class="p">:</span> <span class="n">fields</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">}</span>
+        <span class="n">hal_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;fl&#39;</span><span class="p">:</span> <span class="n">fields</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">}</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">auto_retry_get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">hal_api</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">hal_args</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
         <span class="n">hids</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
@@ -570,20 +588,17 @@ document.write(`
                     <span class="n">hids</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;idHal_s&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;label_s&#39;</span><span class="p">))</span>
                 <span class="k">elif</span> <span class="s1">&#39;person_i&#39;</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
                     <span class="n">pids</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;person_i&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;label_s&#39;</span><span class="p">))</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">Author</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hids</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="o">+</span> \
-            <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">Author</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pids</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="n">clean_aliases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hids</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="o">+</span> \
+            <span class="p">[</span><span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="n">clean_aliases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pids</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span></div>
 
 
-<div class="viewcode-block" id="HAL.find_papers">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HAL.find_papers">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">find_papers</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="HALAuthor.query_papers">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.query_papers">[docs]</a>
+    <span class="k">def</span> <span class="nf">query_papers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        a: :class:`~alcics.database_test.HALAuthor`</span>
-<span class="sd">            HAL author.</span>
 <span class="sd">        s: :class:`~requests.Session`, optional</span>
 <span class="sd">            Session.</span>
 
@@ -595,7 +610,8 @@ document.write(`
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 
-<span class="sd">        &gt;&gt;&gt; papers = sorted(HAL.find_papers(HALAuthor(id=&#39;fabien-mathieu&#39;)),</span>
+<span class="sd">        &gt;&gt;&gt; fabien = HALAuthor(name=&#39;Fabien&#39;, id=&#39;fabien-mathieu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; papers = sorted(fabien.query_papers(),</span>
 <span class="sd">        ...                 key=lambda p: p[&#39;title&#39;])</span>
 <span class="sd">        &gt;&gt;&gt; papers[2] # doctest:  +NORMALIZE_WHITESPACE</span>
 <span class="sd">        {&#39;title&#39;: &#39;Achievable Catalog Size in Peer-to-Peer Video-on-Demand Systems&#39;,</span>
@@ -607,12 +623,13 @@ document.write(`
 <span class="sd">        catalog size drastically increases when the upload capacity of the boxes becomes strictly greater than the</span>
 <span class="sd">        playback rate of videos.&#39;, &#39;key&#39;: &#39;471724&#39;,</span>
 <span class="sd">        &#39;conference&#39;: &#39;Proceedings of the 7th Internnational Workshop on Peer-to-Peer Systems (IPTPS)&#39;,</span>
-<span class="sd">        &#39;type&#39;: &#39;COMM&#39;, &#39;year&#39;: 2008, &#39;url&#39;: &#39;https://inria.hal.science/inria-00471724&#39;,</span>
-<span class="sd">        &#39;authors&#39;: [HALAuthor(id=&#39;yacine-boufkhad&#39;, names=[&#39;Yacine Boufkhad&#39;], person=7352),</span>
-<span class="sd">        HALAuthor(id=&#39;fabien-mathieu&#39;, names=[&#39;Fabien Mathieu&#39;], person=446),</span>
-<span class="sd">        HALAuthor(names=[&#39;Fabien de Montgolfier&#39;], person=949013), HALAuthor(names=[&#39;Diego Perino&#39;]),</span>
-<span class="sd">        HALAuthor(id=&#39;laurentviennot&#39;, names=[&#39;Laurent Viennot&#39;], person=1841)],</span>
-<span class="sd">        &#39;venue&#39;: &#39;Proceedings of the 7th Internnational Workshop on Peer-to-Peer Systems (IPTPS)&#39;}</span>
+<span class="sd">        &#39;type&#39;: &#39;conference&#39;, &#39;year&#39;: 2008, &#39;url&#39;: &#39;https://inria.hal.science/inria-00471724&#39;,</span>
+<span class="sd">        &#39;authors&#39;: [HALAuthor(name=&#39;Yacine Boufkhad&#39;, id=&#39;yacine-boufkhad&#39;, pid=7352),</span>
+<span class="sd">        HALAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;fabien-mathieu&#39;, pid=446),</span>
+<span class="sd">        HALAuthor(name=&#39;Fabien de Montgolfier&#39;, pid=949013),</span>
+<span class="sd">        HALAuthor(name=&#39;Diego Perino&#39;),</span>
+<span class="sd">        HALAuthor(name=&#39;Laurent Viennot&#39;, id=&#39;laurentviennot&#39;, pid=1841)],</span>
+<span class="sd">        &#39;venue&#39;: &#39;Proceedings of the 7th Internnational Workshop on Peer-to-Peer Systems (IPTPS)&#39;, &#39;origin&#39;: &#39;hal&#39;}</span>
 <span class="sd">        &gt;&gt;&gt; papers[-7] # doctest:  +NORMALIZE_WHITESPACE</span>
 <span class="sd">        {&#39;title&#39;: &#39;Upper bounds for stabilization in acyclic preference-based systems&#39;,</span>
 <span class="sd">        &#39;abstract&#39;: &#39;Preference-based systems (p.b.s.) describe interactions between nodes of a system that can rank</span>
@@ -623,49 +640,70 @@ document.write(`
 <span class="sd">        adversarial daemon.&#39;, &#39;key&#39;: &#39;668356&#39;,</span>
 <span class="sd">        &#39;conference&#39;: &quot;SSS&#39;07 - 9th international conference on Stabilization, Safety,</span>
 <span class="sd">        and Security of Distributed Systems&quot;,</span>
-<span class="sd">        &#39;type&#39;: &#39;COMM&#39;, &#39;year&#39;: 2007, &#39;url&#39;: &#39;https://inria.hal.science/hal-00668356&#39;,</span>
-<span class="sd">        &#39;authors&#39;: [HALAuthor(id=&#39;fabien-mathieu&#39;, names=[&#39;Fabien Mathieu&#39;], person=446)],</span>
+<span class="sd">        &#39;type&#39;: &#39;conference&#39;, &#39;year&#39;: 2007, &#39;url&#39;: &#39;https://inria.hal.science/hal-00668356&#39;,</span>
+<span class="sd">        &#39;authors&#39;: [HALAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;fabien-mathieu&#39;, pid=446)],</span>
 <span class="sd">        &#39;venue&#39;: &quot;SSS&#39;07 - 9th international conference on Stabilization, Safety,</span>
-<span class="sd">        and Security of Distributed Systems&quot;}</span>
+<span class="sd">        and Security of Distributed Systems&quot;, &#39;origin&#39;: &#39;hal&#39;}</span>
 
 <span class="sd">        Case of someone with multiple ids one want to cumulate:</span>
 
-<span class="sd">        &gt;&gt;&gt; emilio = HAL.find_author(&#39;Emilio Calvanese&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; emilio # doctest: +NORMALIZE_WHITESPACE</span>
-<span class="sd">        [HALAuthor(names=[&#39;Emilio Calvanese Strinati&#39;], person=911234),</span>
-<span class="sd">        HALAuthor(names=[&#39;Emilio Calvanese Strinati&#39;], person=1301052)]</span>
-<span class="sd">        &gt;&gt;&gt; len(HAL.find_papers(emilio[0]))</span>
+<span class="sd">        &gt;&gt;&gt; emilios = HALAuthor(&#39;Emilio Calvanese&#39;).query_id()</span>
+<span class="sd">        &gt;&gt;&gt; emilios # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">        [HALAuthor(name=&#39;Emilio Calvanese&#39;, aliases=[&#39;Emilio Calvanese Strinati&#39;], pid=911234),</span>
+<span class="sd">        HALAuthor(name=&#39;Emilio Calvanese&#39;, aliases=[&#39;Emilio Calvanese Strinati&#39;], pid=1301052)]</span>
+<span class="sd">        &gt;&gt;&gt; len(emilios[0].query_papers())</span>
 <span class="sd">        9</span>
-<span class="sd">        &gt;&gt;&gt; len(HAL.find_papers(emilio[1]))</span>
+<span class="sd">        &gt;&gt;&gt; len(emilios[1].query_papers())</span>
 <span class="sd">        3</span>
-<span class="sd">        &gt;&gt;&gt; len(HAL.find_papers(HALAuthor(person=911234, alt_persons=[1301052])))</span>
+<span class="sd">        &gt;&gt;&gt; len(HALAuthor(&#39;Emilio&#39;, pid=911234, alt_pids=[1301052]).query_papers())</span>
 <span class="sd">        12</span>
 
 <span class="sd">        Note: an error is raised if not enough data is provided</span>
 
-<span class="sd">        &gt;&gt;&gt; HAL.find_papers(HALAuthor())</span>
+<span class="sd">        &gt;&gt;&gt; HALAuthor(&#39;Fabien Mathieu&#39;).query_papers()</span>
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ...</span>
-<span class="sd">        ValueError: HALAuthor(): must have id or person for papers to be fetched.</span>
+<span class="sd">        ValueError: HALAuthor(name=&#39;Fabien Mathieu&#39;) must have id or pid for papers to be fetched.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">autosession</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="n">api</span> <span class="o">=</span> <span class="s2">&quot;https://api.archives-ouvertes.fr/search/&quot;</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;docid&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract_s&#39;</span><span class="p">,</span> <span class="s1">&#39;label_s&#39;</span><span class="p">,</span> <span class="s1">&#39;uri_s&#39;</span><span class="p">,</span> <span class="s1">&#39;*Title_s&#39;</span><span class="p">,</span> <span class="s1">&#39;title_s&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;producedDateY_i&#39;</span><span class="p">,</span> <span class="s1">&#39;auth_s&#39;</span><span class="p">,</span> <span class="s1">&#39;authFullNamePersonIDIDHal_fs&#39;</span><span class="p">,</span> <span class="s1">&#39;docType_s&#39;</span><span class="p">]</span>
         <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fl&#39;</span><span class="p">:</span> <span class="n">fields</span><span class="p">,</span> <span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;authIdHal_s:</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">person</span><span class="p">:</span>
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;authIdPerson_i:</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">person</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;authIdHal_s:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;authIdPerson_i:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">: must have id or person for papers to be fetched.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> must have id or pid for papers to be fetched.&quot;</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">auto_retry_get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">api</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">parse_entry</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span> <span class="p">[])]</span>
-        <span class="k">for</span> <span class="n">alt</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">alt_persons</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">+=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">find_papers</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">Author</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="n">alt</span><span class="p">))</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_entry</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span> <span class="p">[])]</span>
+        <span class="k">for</span> <span class="n">alt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alt_pids</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="n">alt</span><span class="p">)</span><span class="o">.</span><span class="n">query_papers</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="parse_facet_author">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.parse_facet_author">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_facet_author</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a: :class:`str`</span>
+<span class="sd">        Formatted APH author string from HAL API.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`~alcics.database.hal.HALAuthor`</span>
+<span class="sd">        Sanitized version.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">hid</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_FacetSep_&#39;</span><span class="p">)</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">if</span> <span class="n">pid</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">hid</span> <span class="o">=</span> <span class="n">hid</span> <span class="k">if</span> <span class="n">hid</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">hid</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="n">pid</span><span class="p">)</span></div>
 
 </pre></div>
 

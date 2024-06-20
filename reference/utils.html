@@ -496,11 +496,11 @@ document.write(`
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">alcics.database.blueprint</span> <span class="kn">import</span> <span class="n">DB</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">subclasses</span> <span class="o">=</span> <span class="n">get_classes</span><span class="p">(</span><span class="n">DB</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">alcics.database.blueprint</span> <span class="kn">import</span> <span class="n">DBAuthor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subclasses</span> <span class="o">=</span> <span class="n">get_classes</span><span class="p">(</span><span class="n">DBAuthor</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;db_name&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">subclasses</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span> 
-<span class="go">{&#39;dblp&#39;: &lt;class &#39;alcics.database.dblp.DBLP&#39;&gt;,</span>
-<span class="go">&#39;hal&#39;: &lt;class &#39;alcics.database.hal.HAL&#39;&gt;}</span>
+<span class="go">{&#39;dblp&#39;: &lt;class &#39;alcics.database.dblp.DBLPAuthor&#39;&gt;,</span>
+<span class="go">&#39;hal&#39;: &lt;class &#39;alcics.database.hal.HALAuthor&#39;&gt;}</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -427,12 +427,12 @@ document.write(`
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
  | <a href="#D"><strong>D</strong></a>
- | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  
@@ -484,14 +484,6 @@ document.write(`
         <li><a href="reference/utils.html#module-alcics.utils.requests">module</a>
 </li>
       </ul></li>
-      <li><a href="reference/database.html#alcics.database.dblp.DBLP.Author">Author (alcics.database.dblp.DBLP attribute)</a>
-
-      <ul>
-        <li><a href="reference/database.html#alcics.database.hal.HAL.Author">(alcics.database.hal.HAL attribute)</a>
-</li>
-        <li><a href="reference/database.html#alcics.database.blueprint.Author">(class in alcics.database.blueprint)</a>
-</li>
-      </ul></li>
       <li><a href="reference/utils.html#alcics.utils.requests.auto_retry_get">auto_retry_get() (in module alcics.utils.requests)</a>
 </li>
       <li><a href="reference/utils.html#alcics.utils.requests.autosession">autosession() (in module alcics.utils.requests)</a>
@@ -502,38 +494,14 @@ document.write(`
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/database.html#alcics.database.blueprint.DB">DB (class in alcics.database.blueprint)</a>
-</li>
-      <li><a href="reference/database.html#alcics.database.blueprint.DB.Author">DB.Author (class in alcics.database.blueprint)</a>
+      <li><a href="reference/database.html#alcics.database.blueprint.DBAuthor">DBAuthor (class in alcics.database.blueprint)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/database.html#alcics.database.dblp.DBLP">DBLP (class in alcics.database.dblp)</a>
-</li>
       <li><a href="reference/database.html#alcics.database.dblp.DBLPAuthor">DBLPAuthor (class in alcics.database.dblp)</a>
 </li>
       <li><a href="reference/utils.html#alcics.utils.mixinio.MixInIO.dump">dump() (alcics.utils.mixinio.MixInIO method)</a>
 </li>
-  </ul></td>
-</tr></table>
-
-<h2 id="F">F</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/database.html#alcics.database.dblp.DBLP.find_author">find_author() (alcics.database.dblp.DBLP class method)</a>
-
-      <ul>
-        <li><a href="reference/database.html#alcics.database.hal.HAL.find_author">(alcics.database.hal.HAL class method)</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/database.html#alcics.database.dblp.DBLP.find_papers">find_papers() (alcics.database.dblp.DBLP class method)</a>
-
-      <ul>
-        <li><a href="reference/database.html#alcics.database.hal.HAL.find_papers">(alcics.database.hal.HAL class method)</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -547,10 +515,6 @@ document.write(`
 
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/database.html#alcics.database.hal.HAL">HAL (class in alcics.database.hal)</a>
-</li>
-  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/database.html#alcics.database.hal.HALAuthor">HALAuthor (class in alcics.database.hal)</a>
 </li>
@@ -597,16 +561,36 @@ document.write(`
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/database.html#alcics.database.dblp.DBLP.parse_entry">parse_entry() (alcics.database.dblp.DBLP class method)</a>
+      <li><a href="reference/database.html#alcics.database.dblp.DBLPAuthor.parse_entry">parse_entry() (alcics.database.dblp.DBLPAuthor static method)</a>
 
       <ul>
-        <li><a href="reference/database.html#alcics.database.hal.HAL.parse_entry">(alcics.database.hal.HAL static method)</a>
+        <li><a href="reference/database.html#alcics.database.hal.HALAuthor.parse_entry">(alcics.database.hal.HALAuthor static method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/database.html#alcics.database.hal.parse_facet_author">parse_facet_author() (in module alcics.database.hal)</a>
 </li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/database.html#alcics.database.dblp.DBLPAuthor.query_id">query_id() (alcics.database.dblp.DBLPAuthor method)</a>
+
+      <ul>
+        <li><a href="reference/database.html#alcics.database.hal.HALAuthor.query_id">(alcics.database.hal.HALAuthor method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/database.html#alcics.database.dblp.DBLPAuthor.query_papers">query_papers() (alcics.database.dblp.DBLPAuthor method)</a>
+
+      <ul>
+        <li><a href="reference/database.html#alcics.database.hal.HALAuthor.query_papers">(alcics.database.hal.HALAuthor method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

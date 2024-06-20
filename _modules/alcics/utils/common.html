@@ -500,11 +500,11 @@ document.write(`
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 
-<span class="sd">    &gt;&gt;&gt; from alcics.database.blueprint import DB</span>
-<span class="sd">    &gt;&gt;&gt; subclasses = get_classes(DB)</span>
+<span class="sd">    &gt;&gt;&gt; from alcics.database.blueprint import DBAuthor</span>
+<span class="sd">    &gt;&gt;&gt; subclasses = get_classes(DBAuthor, key=&#39;db_name&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; dict(sorted(subclasses.items())) # doctest: +NORMALIZE_WHITESPACE</span>
-<span class="sd">    {&#39;dblp&#39;: &lt;class &#39;alcics.database.dblp.DBLP&#39;&gt;,</span>
-<span class="sd">    &#39;hal&#39;: &lt;class &#39;alcics.database.hal.HAL&#39;&gt;}</span>
+<span class="sd">    {&#39;dblp&#39;: &lt;class &#39;alcics.database.dblp.DBLPAuthor&#39;&gt;,</span>
+<span class="sd">    &#39;hal&#39;: &lt;class &#39;alcics.database.hal.HALAuthor&#39;&gt;}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="nb">getattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">)}</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
