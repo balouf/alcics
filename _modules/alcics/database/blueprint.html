@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>alcics.database.blueprint &#8212; Analytical Lab Cartography In Computer Science 0.1.0 documentation</title>
+    <title>alcics.database.blueprint &#8212; ALCICS 0.1.0 documentation</title>
   
   
   
@@ -114,7 +114,7 @@
   
   
   
-    <p class="title logo__title">Analytical Lab Cartography In Computer Science 0.1.0 documentation</p>
+    <p class="title logo__title">ALCICS 0.1.0 documentation</p>
   
 </a></div>
     
@@ -466,24 +466,89 @@ document.write(`
 <span class="sd">    Blueprint for DB-specific author management.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">db_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Name of the database.&quot;&quot;&quot;</span>
     <span class="n">query_id_backoff</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time to wait between 2 *query id* calls.&quot;&quot;&quot;</span>
     <span class="n">query_publications_backoff</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Time to wait between 2 *query publications* calls.&quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Author name.&quot;&quot;&quot;</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Id of author in DB.&quot;&quot;&quot;</span>
     <span class="n">aliases</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Alternative names for the author.&quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="DBAuthor.query_publications">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.blueprint.DBAuthor.query_publications">[docs]</a>
     <span class="k">def</span> <span class="nf">query_publications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s: :class:`~requests.Session`, optional</span>
+<span class="sd">            Session.</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`list`</span>
+<span class="sd">            Papers available in DB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="DBAuthor.update_values">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.blueprint.DBAuthor.update_values">[docs]</a>
     <span class="k">def</span> <span class="nf">update_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        author: :class:`~alcics.database.blueprint.DBAuthor`</span>
+<span class="sd">            External author info to inject in current instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">aliases</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">aliases</span></div>
 
+
+<div class="viewcode-block" id="DBAuthor.query_id">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.blueprint.DBAuthor.query_id">[docs]</a>
     <span class="k">def</span> <span class="nf">query_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s: :class:`~requests.Session`, optional</span>
+<span class="sd">            Session.</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`list`</span>
+<span class="sd">            Potential matches.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="DBAuthor.populate_id">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.blueprint.DBAuthor.populate_id">[docs]</a>
     <span class="k">def</span> <span class="nf">populate_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Try to automatically fill-in DB information.</span>
+<span class="sd">        If one unique match is found, the data is integrated.</span>
+
+<span class="sd">        Otherwise, a warning is issued, with some suggestions/URLS.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s: :class:`~requests.Session`, optional</span>
+<span class="sd">            Session.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`int`</span>
+<span class="sd">            Number of matches found (i.e. 1 means success).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -497,17 +562,34 @@ document.write(`
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No entry found for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">db_name</span><span class="si">}</span><span class="s2">. Please populate manually.&quot;</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">size</span>
+        <span class="k">return</span> <span class="n">size</span></div>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :class:`str`</span>
+<span class="sd">            URL associated with the author in the DB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :class:`bool`</span>
+<span class="sd">            Is the author identified in DB?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
+<div class="viewcode-block" id="DBAuthor.iter_keys">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.blueprint.DBAuthor.iter_keys">[docs]</a>
     <span class="k">def</span> <span class="nf">iter_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Yields</span>
+<span class="sd">        -------</span>
+<span class="sd">        :class:`str` or :class:`int`</span>
+<span class="sd">            Key of author (typically name, alias, or internal key).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -515,11 +597,28 @@ document.write(`
                         <span class="k">yield</span> <span class="n">k</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">yield</span> <span class="n">key</span></div>
+</div>
 
 
 
+<div class="viewcode-block" id="clean_aliases">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.blueprint.clean_aliases">[docs]</a>
 <span class="k">def</span> <span class="nf">clean_aliases</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">alias_list</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">alias_list</span> <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="n">name</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name: :class:`str`</span>
+<span class="sd">        Main name.</span>
+<span class="sd">    alias_list: :class:`list`</span>
+<span class="sd">        Aliases.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`list`</span>
+<span class="sd">        Aliases deduped, sorted, and with main name removed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">alias_list</span> <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="n">name</span><span class="p">))</span></div>
+
 
 </pre></div>
 

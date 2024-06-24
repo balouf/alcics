@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Database &#8212; Analytical Lab Cartography In Computer Science 0.1.0 documentation</title>
+    <title>Database &#8212; ALCICS 0.1.0 documentation</title>
   
   
   
@@ -43,7 +43,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Utils" href="utils.html" />
-    <link rel="prev" title="Reference" href="index.html" />
+    <link rel="prev" title="Laboratory" href="lab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">Analytical Lab Cartography In Computer Science 0.1.0 documentation</p>
+    <p class="title logo__title">ALCICS 0.1.0 documentation</p>
   
 </a></div>
     
@@ -411,6 +411,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lab.html">Laboratory</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
@@ -470,18 +471,175 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-alcics.database.blueprint">
-<span id="database"></span><h1>Database<a class="headerlink" href="#module-alcics.database.blueprint" title="Link to this heading">#</a></h1>
-<dl class="py class">
+  <section id="database">
+<h1>Database<a class="headerlink" href="#database" title="Link to this heading">#</a></h1>
+<p>Classes and functions to interact with databases of publications.</p>
+<section id="blueprint">
+<h2>Blueprint<a class="headerlink" href="#blueprint" title="Link to this heading">#</a></h2>
+<p>Abstract description of ALCICS’ DB interface.</p>
+<dl class="py class" id="module-alcics.database.blueprint">
 <dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">alcics.database.blueprint.</span></span><span class="sig-name descname"><span class="pre">DBAuthor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#DBAuthor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.DBAuthor" title="Link to this definition">#</a></dt>
 <dd><p>Blueprint for DB-specific author management.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.aliases">
+<span class="sig-name descname"><span class="pre">aliases</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></em><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.aliases" title="Link to this definition">#</a></dt>
+<dd><p>Alternative names for the author.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.db_name">
+<span class="sig-name descname"><span class="pre">db_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.db_name" title="Link to this definition">#</a></dt>
+<dd><p>Name of the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.id" title="Link to this definition">#</a></dt>
+<dd><p>Id of author in DB.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.is_set">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_set</span></span><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.is_set" title="Link to this definition">#</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>
+Is the author identified in DB?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.iter_keys">
+<span class="sig-name descname"><span class="pre">iter_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#DBAuthor.iter_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.iter_keys" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> – Key of author (typically name, alias, or internal key).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.name" title="Link to this definition">#</a></dt>
+<dd><p>Author name.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.populate_id">
+<span class="sig-name descname"><span class="pre">populate_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#DBAuthor.populate_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.populate_id" title="Link to this definition">#</a></dt>
+<dd><p>Try to automatically fill-in DB information.
+If one unique match is found, the data is integrated.</p>
+<p>Otherwise, a warning is issued, with some suggestions/URLS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of matches found (i.e. 1 means success).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.query_id">
+<span class="sig-name descname"><span class="pre">query_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#DBAuthor.query_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.query_id" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Potential matches.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.query_id_backoff">
+<span class="sig-name descname"><span class="pre">query_id_backoff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.query_id_backoff" title="Link to this definition">#</a></dt>
+<dd><p>Time to wait between 2 <em>query id</em> calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.query_publications">
+<span class="sig-name descname"><span class="pre">query_publications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#DBAuthor.query_publications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.query_publications" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Papers available in DB.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.query_publications_backoff">
+<span class="sig-name descname"><span class="pre">query_publications_backoff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.query_publications_backoff" title="Link to this definition">#</a></dt>
+<dd><p>Time to wait between 2 <em>query publications</em> calls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.update_values">
+<span class="sig-name descname"><span class="pre">update_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">author</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#DBAuthor.update_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.update_values" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>author</strong> (<a class="reference internal" href="#alcics.database.blueprint.DBAuthor" title="alcics.database.blueprint.DBAuthor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBAuthor</span></code></a>) – External author info to inject in current instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="alcics.database.blueprint.DBAuthor.url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#alcics.database.blueprint.DBAuthor.url" title="Link to this definition">#</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>
+URL associated with the author in the DB.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="alcics.database.blueprint.clean_aliases">
+<span class="sig-prename descclassname"><span class="pre">alcics.database.blueprint.</span></span><span class="sig-name descname"><span class="pre">clean_aliases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/blueprint.html#clean_aliases"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.blueprint.clean_aliases" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Main name.</p></li>
+<li><p><strong>alias_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Aliases.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Aliases deduped, sorted, and with main name removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="dblp">
+<h2>DBLP<a class="headerlink" href="#dblp" title="Link to this heading">#</a></h2>
+<p>Interface for <em>dblp computer science bibliography</em> (<a class="reference external" href="https://dblp.org/">https://dblp.org/</a>).</p>
 <dl class="py class" id="module-alcics.database.dblp">
 <dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">alcics.database.dblp.</span></span><span class="sig-name descname"><span class="pre">DBLPAuthor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/dblp.html#DBLPAuthor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor" title="Link to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.db_name">
+<span class="sig-name descname"><span class="pre">db_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dblp'</span></em><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.db_name" title="Link to this definition">#</a></dt>
+<dd><p>Name of the database.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.parse_entry">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/dblp.html#DBLPAuthor.parse_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.parse_entry" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
@@ -542,6 +700,12 @@ document.write(`
 </div>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.query_id_backoff">
+<span class="sig-name descname"><span class="pre">query_id_backoff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7.0</span></em><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.query_id_backoff" title="Link to this definition">#</a></dt>
+<dd><p>Time to wait between 2 <em>query id</em> calls.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.query_publications">
 <span class="sig-name descname"><span class="pre">query_publications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/dblp.html#DBLPAuthor.query_publications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.query_publications" title="Link to this definition">#</a></dt>
@@ -550,7 +714,7 @@ document.write(`
 <dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Papers available in DBLP</p>
+<dd class="field-even"><p>Papers available in DBLP.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
@@ -578,12 +742,48 @@ document.write(`
 </div>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.query_publications_backoff">
+<span class="sig-name descname"><span class="pre">query_publications_backoff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.0</span></em><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.query_publications_backoff" title="Link to this definition">#</a></dt>
+<dd><p>Time to wait between 2 <em>query publications</em> calls.</p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.url" title="Link to this definition">#</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>
+URL associated with the author in the DB.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="hal">
+<h2>HAL<a class="headerlink" href="#hal" title="Link to this heading">#</a></h2>
+<p>Interface for <em>HyperArticles en Ligne</em> (<a class="reference external" href="https://hal.science/">https://hal.science/</a>).</p>
 <dl class="py class" id="module-alcics.database.hal">
 <dt class="sig sig-object py" id="alcics.database.hal.HALAuthor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">alcics.database.hal.</span></span><span class="sig-name descname"><span class="pre">HALAuthor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pid:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt_pids:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/hal.html#HALAuthor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.hal.HALAuthor" title="Link to this definition">#</a></dt>
-<dd><dl class="py method">
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.alt_pids">
+<span class="sig-name descname"><span class="pre">alt_pids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></em><a class="headerlink" href="#alcics.database.hal.HALAuthor.alt_pids" title="Link to this definition">#</a></dt>
+<dd><p>One author has one unique hal-id but possibly multiple Personal Ids. Extra pids should be put here.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.db_name">
+<span class="sig-name descname"><span class="pre">db_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ClassVar" title="(in Python v3.12)"><span class="pre">ClassVar</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hal'</span></em><a class="headerlink" href="#alcics.database.hal.HALAuthor.db_name" title="Link to this definition">#</a></dt>
+<dd><p>Name of the database.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.is_set">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_set</span></span><a class="headerlink" href="#alcics.database.hal.HALAuthor.is_set" title="Link to this definition">#</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>
+Is the author identified in DB?</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.parse_entry">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/hal.html#HALAuthor.parse_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.hal.HALAuthor.parse_entry" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
@@ -597,6 +797,12 @@ document.write(`
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.pid">
+<span class="sig-name descname"><span class="pre">pid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#alcics.database.hal.HALAuthor.pid" title="Link to this definition">#</a></dt>
+<dd><p>Personal Id, an integer that can be used when hal-id is not available.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -657,7 +863,7 @@ document.write(`
 <dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Papers available in DBLP</p>
+<dd class="field-even"><p>Papers available in HAL.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
@@ -722,6 +928,26 @@ document.write(`
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.update_values">
+<span class="sig-name descname"><span class="pre">update_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">author</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/hal.html#HALAuthor.update_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.hal.HALAuthor.update_values" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>author</strong> (<a class="reference internal" href="#alcics.database.blueprint.DBAuthor" title="alcics.database.blueprint.DBAuthor"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBAuthor</span></code></a>) – External author info to inject in current instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.url">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#alcics.database.hal.HALAuthor.url" title="Link to this definition">#</a></dt>
+<dd><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>
+URL associated with the author in the DB.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py function">
@@ -741,6 +967,7 @@ document.write(`
 </dd></dl>
 
 </section>
+</section>
 
 
                 </article>
@@ -753,12 +980,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="lab.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Reference</p>
+        <p class="prev-next-title">Laboratory</p>
       </div>
     </a>
     <a class="right-next"
@@ -786,20 +1013,55 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor"><code class="docutils literal notranslate"><span class="pre">DBAuthor</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.parse_entry()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blueprint">Blueprint</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor"><code class="docutils literal notranslate"><span class="pre">DBAuthor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.aliases"><code class="docutils literal notranslate"><span class="pre">DBAuthor.aliases</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.db_name"><code class="docutils literal notranslate"><span class="pre">DBAuthor.db_name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.id"><code class="docutils literal notranslate"><span class="pre">DBAuthor.id</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.is_set"><code class="docutils literal notranslate"><span class="pre">DBAuthor.is_set</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.iter_keys"><code class="docutils literal notranslate"><span class="pre">DBAuthor.iter_keys()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.name"><code class="docutils literal notranslate"><span class="pre">DBAuthor.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.populate_id"><code class="docutils literal notranslate"><span class="pre">DBAuthor.populate_id()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_id()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.query_id_backoff"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_id_backoff</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_publications()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.query_publications_backoff"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_publications_backoff</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.update_values"><code class="docutils literal notranslate"><span class="pre">DBAuthor.update_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.DBAuthor.url"><code class="docutils literal notranslate"><span class="pre">DBAuthor.url</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor"><code class="docutils literal notranslate"><span class="pre">HALAuthor</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">HALAuthor.parse_entry()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_id()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_publications()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.blueprint.clean_aliases"><code class="docutils literal notranslate"><span class="pre">clean_aliases()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.parse_facet_author"><code class="docutils literal notranslate"><span class="pre">parse_facet_author()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dblp">DBLP</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.db_name"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.db_name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.parse_entry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_id_backoff"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id_backoff</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_publications_backoff"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications_backoff</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.url"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hal">HAL</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor"><code class="docutils literal notranslate"><span class="pre">HALAuthor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.alt_pids"><code class="docutils literal notranslate"><span class="pre">HALAuthor.alt_pids</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.db_name"><code class="docutils literal notranslate"><span class="pre">HALAuthor.db_name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.is_set"><code class="docutils literal notranslate"><span class="pre">HALAuthor.is_set</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">HALAuthor.parse_entry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.pid"><code class="docutils literal notranslate"><span class="pre">HALAuthor.pid</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_id()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_publications()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.update_values"><code class="docutils literal notranslate"><span class="pre">HALAuthor.update_values()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.url"><code class="docutils literal notranslate"><span class="pre">HALAuthor.url</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.parse_facet_author"><code class="docutils literal notranslate"><span class="pre">parse_facet_author()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

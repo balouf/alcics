@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Utils &#8212; Analytical Lab Cartography In Computer Science 0.1.0 documentation</title>
+    <title>Utils &#8212; ALCICS 0.1.0 documentation</title>
   
   
   
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">Analytical Lab Cartography In Computer Science 0.1.0 documentation</p>
+    <p class="title logo__title">ALCICS 0.1.0 documentation</p>
   
 </a></div>
     
@@ -411,6 +411,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lab.html">Laboratory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Utils</a></li>
 </ul>
@@ -470,9 +471,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-alcics.utils.common">
-<span id="utils"></span><h1>Utils<a class="headerlink" href="#module-alcics.utils.common" title="Link to this heading">#</a></h1>
-<dl class="py class">
+  <section id="utils">
+<h1>Utils<a class="headerlink" href="#utils" title="Link to this heading">#</a></h1>
+<p>Various functions and classes.</p>
+<section id="common">
+<h2>Common<a class="headerlink" href="#common" title="Link to this heading">#</a></h2>
+<p>All-purpose functions</p>
+<dl class="py class" id="module-alcics.utils.common">
 <dt class="sig sig-object py" id="alcics.utils.common.LazyRepr">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">alcics.utils.common.</span></span><span class="sig-name descname"><span class="pre">LazyRepr</span></span><a class="reference internal" href="../_modules/alcics/utils/common.html#LazyRepr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.utils.common.LazyRepr" title="Link to this definition">#</a></dt>
 <dd><p>MixIn that hides empty fields in dataclasses repr’s.</p>
@@ -521,6 +526,10 @@ document.write(`
 </dl>
 </dd></dl>
 
+</section>
+<section id="requests">
+<h2>Requests<a class="headerlink" href="#requests" title="Link to this heading">#</a></h2>
+<p>Functions related to the <cite>requests</cite></p>
 <dl class="py function" id="module-alcics.utils.requests">
 <dt class="sig sig-object py" id="alcics.utils.requests.auto_retry_get">
 <span class="sig-prename descclassname"><span class="pre">alcics.utils.requests.</span></span><span class="sig-name descname"><span class="pre">auto_retry_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/utils/requests.html#auto_retry_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.utils.requests.auto_retry_get" title="Link to this definition">#</a></dt>
@@ -557,6 +566,10 @@ document.write(`
 </dl>
 </dd></dl>
 
+</section>
+<section id="mixinio">
+<h2>MixInIO<a class="headerlink" href="#mixinio" title="Link to this heading">#</a></h2>
+<p>MixInIO class (make classes easy to dump and load).</p>
 <dl class="py class" id="module-alcics.utils.mixinio">
 <dt class="sig sig-object py" id="alcics.utils.mixinio.MixInIO">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">alcics.utils.mixinio.</span></span><span class="sig-name descname"><span class="pre">MixInIO</span></span><a class="reference internal" href="../_modules/alcics/utils/mixinio.html#MixInIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.utils.mixinio.MixInIO" title="Link to this definition">#</a></dt>
@@ -640,8 +653,15 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="alcics.utils.mixinio.ToyClass">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">alcics.utils.mixinio.</span></span><span class="sig-name descname"><span class="pre">ToyClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/utils/mixinio.html#ToyClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.utils.mixinio.ToyClass" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Used to demonstrate how MixInIO works.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>any</em>) – Something to store.</p>
+</dd>
+</dl>
+</dd></dl>
 
+</section>
 </section>
 
 
@@ -688,17 +708,26 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.common.LazyRepr"><code class="docutils literal notranslate"><span class="pre">LazyRepr</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.common.get_classes"><code class="docutils literal notranslate"><span class="pre">get_classes()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.common.unlist"><code class="docutils literal notranslate"><span class="pre">unlist()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.requests.auto_retry_get"><code class="docutils literal notranslate"><span class="pre">auto_retry_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.requests.autosession"><code class="docutils literal notranslate"><span class="pre">autosession()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.MixInIO"><code class="docutils literal notranslate"><span class="pre">MixInIO</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.MixInIO.dump"><code class="docutils literal notranslate"><span class="pre">MixInIO.dump()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.MixInIO.load"><code class="docutils literal notranslate"><span class="pre">MixInIO.load()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common">Common</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.common.LazyRepr"><code class="docutils literal notranslate"><span class="pre">LazyRepr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.common.get_classes"><code class="docutils literal notranslate"><span class="pre">get_classes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.common.unlist"><code class="docutils literal notranslate"><span class="pre">unlist()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.ToyClass"><code class="docutils literal notranslate"><span class="pre">ToyClass</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requests">Requests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.requests.auto_retry_get"><code class="docutils literal notranslate"><span class="pre">auto_retry_get()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.requests.autosession"><code class="docutils literal notranslate"><span class="pre">autosession()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixinio">MixInIO</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.MixInIO"><code class="docutils literal notranslate"><span class="pre">MixInIO</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.MixInIO.dump"><code class="docutils literal notranslate"><span class="pre">MixInIO.dump()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.MixInIO.load"><code class="docutils literal notranslate"><span class="pre">MixInIO.load()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.utils.mixinio.ToyClass"><code class="docutils literal notranslate"><span class="pre">ToyClass</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

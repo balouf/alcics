@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>alcics.database.hal &#8212; Analytical Lab Cartography In Computer Science 0.1.0 documentation</title>
+    <title>alcics.database.hal &#8212; ALCICS 0.1.0 documentation</title>
   
   
   
@@ -114,7 +114,7 @@
   
   
   
-    <p class="title logo__title">Analytical Lab Cartography In Computer Science 0.1.0 documentation</p>
+    <p class="title logo__title">ALCICS 0.1.0 documentation</p>
   
 </a></div>
     
@@ -477,7 +477,9 @@ document.write(`
     <span class="n">db_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hal&#39;</span>
 
     <span class="n">pid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Personal Id, an integer that can be used when hal-id is not available.&quot;&quot;&quot;</span>
     <span class="n">alt_pids</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;One author has one unique hal-id but possibly multiple Personal Ids. Extra pids should be put here.&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -491,10 +493,13 @@ document.write(`
     <span class="k">def</span> <span class="nf">is_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
+<div class="viewcode-block" id="HALAuthor.update_values">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.update_values">[docs]</a>
     <span class="k">def</span> <span class="nf">update_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update_values</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">pid</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alt_pids</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">alt_pids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alt_pids</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">alt_pids</span></div>
+
 
 <div class="viewcode-block" id="HALAuthor.parse_entry">
 <a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.parse_entry">[docs]</a>
@@ -598,7 +603,6 @@ document.write(`
 <a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.query_publications">[docs]</a>
     <span class="k">def</span> <span class="nf">query_publications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        s: :class:`~requests.Session`, optional</span>
@@ -607,7 +611,7 @@ document.write(`
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        :class:`list`</span>
-<span class="sd">            Papers available in DBLP</span>
+<span class="sd">            Papers available in HAL.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>

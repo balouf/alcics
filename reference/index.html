@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Reference &#8212; Analytical Lab Cartography In Computer Science 0.1.0 documentation</title>
+    <title>Reference &#8212; ALCICS 0.1.0 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Database" href="database.html" />
+    <link rel="next" title="Laboratory" href="lab.html" />
     <link rel="prev" title="Second tutorial" href="../tutorials/answer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">Analytical Lab Cartography In Computer Science 0.1.0 documentation</p>
+    <p class="title logo__title">ALCICS 0.1.0 documentation</p>
   
 </a></div>
     
@@ -411,6 +411,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lab.html">Laboratory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
@@ -471,35 +472,122 @@ document.write(`
 <h1>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="lab.html">Laboratory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lab.html#lab">Lab</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab"><code class="docutils literal notranslate"><span class="pre">Lab</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.compute_keys"><code class="docutils literal notranslate"><span class="pre">Lab.compute_keys()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.constructor"><code class="docutils literal notranslate"><span class="pre">Lab.constructor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.get_ids"><code class="docutils literal notranslate"><span class="pre">Lab.get_ids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.get_publications"><code class="docutils literal notranslate"><span class="pre">Lab.get_publications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.manual_update"><code class="docutils literal notranslate"><span class="pre">Lab.manual_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.member_list"><code class="docutils literal notranslate"><span class="pre">Lab.member_list</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.member_to_text"><code class="docutils literal notranslate"><span class="pre">Lab.member_to_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.lab.Lab.publi_to_text"><code class="docutils literal notranslate"><span class="pre">Lab.publi_to_text()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html#member">Member</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lab.html#alcics.lab.member.Member"><code class="docutils literal notranslate"><span class="pre">Member</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.member.Member.get_papers"><code class="docutils literal notranslate"><span class="pre">Member.get_papers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.member.Member.key"><code class="docutils literal notranslate"><span class="pre">Member.key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.member.Member.prepare"><code class="docutils literal notranslate"><span class="pre">Member.prepare()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lab.html#publication">Publication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication"><code class="docutils literal notranslate"><span class="pre">Publication</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.abstract"><code class="docutils literal notranslate"><span class="pre">Publication.abstract</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.authors"><code class="docutils literal notranslate"><span class="pre">Publication.authors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.key"><code class="docutils literal notranslate"><span class="pre">Publication.key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.score_raw_publi"><code class="docutils literal notranslate"><span class="pre">Publication.score_raw_publi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.sources"><code class="docutils literal notranslate"><span class="pre">Publication.sources</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.string"><code class="docutils literal notranslate"><span class="pre">Publication.string</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.title"><code class="docutils literal notranslate"><span class="pre">Publication.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.type"><code class="docutils literal notranslate"><span class="pre">Publication.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.venue"><code class="docutils literal notranslate"><span class="pre">Publication.venue</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lab.html#alcics.lab.publication.Publication.year"><code class="docutils literal notranslate"><span class="pre">Publication.year</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lab.html#alcics.lab.publication.score_rosetta"><code class="docutils literal notranslate"><span class="pre">score_rosetta</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor"><code class="docutils literal notranslate"><span class="pre">DBAuthor</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.parse_entry()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#blueprint">Blueprint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor"><code class="docutils literal notranslate"><span class="pre">DBAuthor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.aliases"><code class="docutils literal notranslate"><span class="pre">DBAuthor.aliases</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.db_name"><code class="docutils literal notranslate"><span class="pre">DBAuthor.db_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.id"><code class="docutils literal notranslate"><span class="pre">DBAuthor.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.is_set"><code class="docutils literal notranslate"><span class="pre">DBAuthor.is_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.iter_keys"><code class="docutils literal notranslate"><span class="pre">DBAuthor.iter_keys()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.name"><code class="docutils literal notranslate"><span class="pre">DBAuthor.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.populate_id"><code class="docutils literal notranslate"><span class="pre">DBAuthor.populate_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.query_id_backoff"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_id_backoff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_publications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.query_publications_backoff"><code class="docutils literal notranslate"><span class="pre">DBAuthor.query_publications_backoff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.update_values"><code class="docutils literal notranslate"><span class="pre">DBAuthor.update_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.blueprint.DBAuthor.url"><code class="docutils literal notranslate"><span class="pre">DBAuthor.url</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor"><code class="docutils literal notranslate"><span class="pre">HALAuthor</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">HALAuthor.parse_entry()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_id()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_publications()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.blueprint.clean_aliases"><code class="docutils literal notranslate"><span class="pre">clean_aliases()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="database.html#alcics.database.hal.parse_facet_author"><code class="docutils literal notranslate"><span class="pre">parse_facet_author()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#dblp">DBLP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.db_name"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.db_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.parse_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.query_id_backoff"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id_backoff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.query_publications_backoff"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications_backoff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.dblp.DBLPAuthor.url"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#hal">HAL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor"><code class="docutils literal notranslate"><span class="pre">HALAuthor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.alt_pids"><code class="docutils literal notranslate"><span class="pre">HALAuthor.alt_pids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.db_name"><code class="docutils literal notranslate"><span class="pre">HALAuthor.db_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.is_set"><code class="docutils literal notranslate"><span class="pre">HALAuthor.is_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">HALAuthor.parse_entry()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.pid"><code class="docutils literal notranslate"><span class="pre">HALAuthor.pid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_publications()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.update_values"><code class="docutils literal notranslate"><span class="pre">HALAuthor.update_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#alcics.database.hal.HALAuthor.url"><code class="docutils literal notranslate"><span class="pre">HALAuthor.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#alcics.database.hal.parse_facet_author"><code class="docutils literal notranslate"><span class="pre">parse_facet_author()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.common.LazyRepr"><code class="docutils literal notranslate"><span class="pre">LazyRepr</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.common.get_classes"><code class="docutils literal notranslate"><span class="pre">get_classes()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.common.unlist"><code class="docutils literal notranslate"><span class="pre">unlist()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.requests.auto_retry_get"><code class="docutils literal notranslate"><span class="pre">auto_retry_get()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.requests.autosession"><code class="docutils literal notranslate"><span class="pre">autosession()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO"><code class="docutils literal notranslate"><span class="pre">MixInIO</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO.dump"><code class="docutils literal notranslate"><span class="pre">MixInIO.dump()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO.load"><code class="docutils literal notranslate"><span class="pre">MixInIO.load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#common">Common</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.common.LazyRepr"><code class="docutils literal notranslate"><span class="pre">LazyRepr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.common.get_classes"><code class="docutils literal notranslate"><span class="pre">get_classes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.common.unlist"><code class="docutils literal notranslate"><span class="pre">unlist()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#alcics.utils.mixinio.ToyClass"><code class="docutils literal notranslate"><span class="pre">ToyClass</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#requests">Requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.requests.auto_retry_get"><code class="docutils literal notranslate"><span class="pre">auto_retry_get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.requests.autosession"><code class="docutils literal notranslate"><span class="pre">autosession()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#mixinio">MixInIO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO"><code class="docutils literal notranslate"><span class="pre">MixInIO</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO.dump"><code class="docutils literal notranslate"><span class="pre">MixInIO.dump()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#alcics.utils.mixinio.MixInIO.load"><code class="docutils literal notranslate"><span class="pre">MixInIO.load()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#alcics.utils.mixinio.ToyClass"><code class="docutils literal notranslate"><span class="pre">ToyClass</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -526,11 +614,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="database.html"
+       href="lab.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Database</p>
+        <p class="prev-next-title">Laboratory</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
