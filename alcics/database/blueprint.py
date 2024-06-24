@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import ClassVar
 
 from alcics.utils.common import LazyRepr
@@ -12,13 +12,13 @@ class DBAuthor(LazyRepr):
     """
     db_name: ClassVar[str] = None
     query_id_backoff: ClassVar[float] = 0.0
-    query_papers_backoff: ClassVar[float] = 0.0
+    query_publications_backoff: ClassVar[float] = 0.0
 
     name: str
     id: str = None
     aliases: list = field(default_factory=list)
 
-    def query_papers(self, s=None):
+    def query_publications(self, s=None):
         raise NotImplementedError
 
     def update_values(self, author):
@@ -51,6 +51,15 @@ class DBAuthor(LazyRepr):
     @property
     def is_set(self):
         return self.id is not None
+
+    def iter_keys(self):
+        for key in asdict(self).values():
+            if key:
+                if isinstance(key, list):
+                    for k in key:
+                        yield k
+                else:
+                    yield key
 
 
 def clean_aliases(name, alias_list):

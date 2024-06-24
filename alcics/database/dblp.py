@@ -22,7 +22,7 @@ DBLP_TYPES = {'article': 'journal',
 class DBLPAuthor(DBAuthor):
     db_name: ClassVar[str] = 'dblp'
     query_id_backoff: ClassVar[float] = 7.0
-    query_papers_backoff: ClassVar[float] = 2.0
+    query_publications_backoff: ClassVar[float] = 2.0
 
     @property
     def url(self):
@@ -61,6 +61,9 @@ class DBLPAuthor(DBAuthor):
             t = p.find(tag)
             if t:
                 res['venue'] = t.text
+                break
+        else:
+            res['venue'] = 'unpublished'
         res['authors'] = [DBLPAuthor(id=a['pid'], name=a.text)
                           for a in p('author')]
         res['origin'] = 'dblp'
@@ -117,7 +120,7 @@ class DBLPAuthor(DBAuthor):
                            aliases=clean_aliases(self.name, [hit.author.text] + [alia.text for alia in hit('alias')]))
                 for hit in soup('hit')]
 
-    def query_papers(self, s=None):
+    def query_publications(self, s=None):
         """
 
         Parameters
@@ -134,9 +137,9 @@ class DBLPAuthor(DBAuthor):
         --------
 
         >>> fabien = DBLPAuthor('Fabien Mathieu', id='66/2077')
-        >>> papers = sorted(fabien.query_papers(),
+        >>> publications = sorted(fabien.query_publications(),
         ...                 key=lambda p: p['title'])
-        >>> papers[0] # doctest:  +NORMALIZE_WHITESPACE
+        >>> publications[0] # doctest:  +NORMALIZE_WHITESPACE
         {'type': 'conference', 'key': 'conf/iptps/BoufkhadMMPV08',
         'url': 'https://dblp.org/rec/conf/iptps/BoufkhadMMPV08.html',
         'title': 'Achievable catalog size in peer-to-peer video-on-demand systems.',
@@ -144,7 +147,7 @@ class DBLPAuthor(DBAuthor):
         'authors': [DBLPAuthor(name='Yacine Boufkhad', id='75/5742'), DBLPAuthor(name='Fabien Mathieu', id='66/2077'),
         DBLPAuthor(name='Fabien de Montgolfier', id='57/6313'), DBLPAuthor(name='Diego Perino', id='03/3645'),
         DBLPAuthor(name='Laurent Viennot', id='v/LaurentViennot')], 'origin': 'dblp'}
-        >>> papers[-1] # doctest:  +NORMALIZE_WHITESPACE
+        >>> publications[-1] # doctest:  +NORMALIZE_WHITESPACE
         {'type': 'conference', 'key': 'conf/sss/Mathieu07',
         'url': 'https://dblp.org/rec/conf/sss/Mathieu07.html',
         'title': 'Upper Bounds for Stabilization in Acyclic Preference-Based Systems.',

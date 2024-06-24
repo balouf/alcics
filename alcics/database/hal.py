@@ -63,6 +63,8 @@ class HALAuthor(DBAuthor):
             if tag in res:
                 res['venue'] = res[tag]
                 break
+        else:
+            res['venue'] = 'unpublished'
         res['type'] = HAL_TYPES.get(res['type'], res['type'].lower())
         res['origin'] = 'hal'
         return res
@@ -131,7 +133,7 @@ class HALAuthor(DBAuthor):
         return [HALAuthor(name=self.name, id=k, aliases=clean_aliases(self.name, v)) for k, v in hids.items()] + \
             [HALAuthor(name=self.name, pid=k, aliases=clean_aliases(self.name, v)) for k, v in pids.items()]
 
-    def query_papers(self, s=None):
+    def query_publications(self, s=None):
         """
 
         Parameters
@@ -148,9 +150,9 @@ class HALAuthor(DBAuthor):
         --------
 
         >>> fabien = HALAuthor(name='Fabien', id='fabien-mathieu')
-        >>> papers = sorted(fabien.query_papers(),
+        >>> publications = sorted(fabien.query_publications(),
         ...                 key=lambda p: p['title'])
-        >>> papers[2] # doctest:  +NORMALIZE_WHITESPACE
+        >>> publications[2] # doctest:  +NORMALIZE_WHITESPACE
         {'title': 'Achievable Catalog Size in Peer-to-Peer Video-on-Demand Systems',
         'abstract': 'We analyze a system where $n$ set-top boxes with same upload and storage capacities collaborate to
         serve $r$ videos simultaneously (a typical value is $r=n$). We give upper and lower bounds on the catalog size
@@ -167,7 +169,7 @@ class HALAuthor(DBAuthor):
         HALAuthor(name='Diego Perino'),
         HALAuthor(name='Laurent Viennot', id='laurentviennot', pid=1841)],
         'venue': 'Proceedings of the 7th Internnational Workshop on Peer-to-Peer Systems (IPTPS)', 'origin': 'hal'}
-        >>> papers[-7] # doctest:  +NORMALIZE_WHITESPACE
+        >>> publications[-7] # doctest:  +NORMALIZE_WHITESPACE
         {'title': 'Upper bounds for stabilization in acyclic preference-based systems',
         'abstract': 'Preference-based systems (p.b.s.) describe interactions between nodes of a system that can rank
         their neighbors. Previous work has shown that p.b.s. converge to a unique locally stable matching if an
@@ -188,19 +190,19 @@ class HALAuthor(DBAuthor):
         >>> emilios # doctest: +NORMALIZE_WHITESPACE
         [HALAuthor(name='Emilio Calvanese', aliases=['Emilio Calvanese Strinati'], pid=911234),
         HALAuthor(name='Emilio Calvanese', aliases=['Emilio Calvanese Strinati'], pid=1301052)]
-        >>> len(emilios[0].query_papers())
+        >>> len(emilios[0].query_publications())
         9
-        >>> len(emilios[1].query_papers())
+        >>> len(emilios[1].query_publications())
         3
-        >>> len(HALAuthor('Emilio', pid=911234, alt_pids=[1301052]).query_papers())
+        >>> len(HALAuthor('Emilio', pid=911234, alt_pids=[1301052]).query_publications())
         12
 
         Note: an error is raised if not enough data is provided
 
-        >>> HALAuthor('Fabien Mathieu').query_papers()
+        >>> HALAuthor('Fabien Mathieu').query_publications()
         Traceback (most recent call last):
         ...
-        ValueError: HALAuthor(name='Fabien Mathieu') must have id or pid for papers to be fetched.
+        ValueError: HALAuthor(name='Fabien Mathieu') must have id or pid for publications to be fetched.
         """
         s = autosession(s)
         api = "https://api.archives-ouvertes.fr/search/"
@@ -212,12 +214,12 @@ class HALAuthor(DBAuthor):
         elif self.pid:
             params['q'] = f"authIdPerson_i:{self.pid}"
         else:
-            raise ValueError(f"{self} must have id or pid for papers to be fetched.")
+            raise ValueError(f"{self} must have id or pid for publications to be fetched.")
         r = auto_retry_get(s, api, params=params)
         response = json.loads(r.text)['response']
         res = [self.parse_entry(r) for r in response.get('docs', [])]
         for alt in self.alt_pids:
-            res += HALAuthor(name=self.name, pid=alt).query_papers(s)
+            res += HALAuthor(name=self.name, pid=alt).query_publications(s)
         return res
 
 

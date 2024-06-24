@@ -1,68 +1,94 @@
-from dataclasses import dataclass, field, asdict
-from time import sleep
+from bof.fuzz import Process
+from collections import defaultdict
+import numpy as np
 
-from alcics.utils.common import LazyRepr, get_classes
+from alcics.lab.member import Member
+from alcics.lab.publication import Publication
+from alcics.utils.common import get_classes
 from alcics.utils.logger import logger
 from alcics.utils.mixinio import MixInIO
 from alcics.utils.requests import autosession
 from alcics.database.blueprint import DBAuthor
 
 
-class Member(LazyRepr):
-
-    def __init__(self, name, db_dict=None):
-        self.name = name
-        if db_dict is None:
-            db_dict = get_classes(DBAuthor, key='db_name')
-        dbs = [db for db in db_dict.keys()]
-        self.sources = {db: db_dict[db](name=name) for db in dbs}
-        self.papers = []
-
-    def prepare(self, s=None, backoff=False, rewrite=False):
-        for db_author in self.sources.values():
-            if rewrite or not db_author.is_set:
-                db_author.populate_id(s)
-                if backoff:
-                    sleep(db_author.query_id_backoff)
-
-    def get_papers(self, s=None, backoff=False):
-        papers = []
-        for db_author in self.sources.values():
-            if db_author.is_set:
-                papers += db_author.query_papers(s)
-                if backoff:
-                    sleep(db_author.query_papers_backoff)
-            else:
-                logger.warning(f"{db_author.name} is not properly identified in {db_author.db_name}.")
-        return papers
-
-
 class Team(MixInIO):
     Member = Member
 
-    def __init__(self, members):
-        self.members = None
-        self.member_dict = None
-        self.initiate_members(members)
-        self.articles = None
-        self.s = autosession(None)
-
-    def initiate_members(self, members, db_dict=None):
+    def __init__(self, members, db_dict=None):
+        self.members = dict()
+        self.member_keys = None
         if db_dict is None:
             db_dict = get_classes(DBAuthor, key='db_name')
-        self.members = [Member(name, db_dict=db_dict) for name in members]
-        self.member_dict = {m.name: m for m in self.members}
+        for name in members:
+            member = Member(name, db_dict=db_dict)
+            self.members[member.key] = member
+        self.publications = None
+        self.s = autosession(None)
+
+    @property
+    def member_list(self):
+        return [m for m in self.members.values()]
 
     def manual_update(self, up_list):
         for db_auth in up_list:
             name = db_auth.name
-            if name not in self.member_dict:
+            if name not in self.members:
                 logger.warning(f"{name} is not a registered team author.")
                 continue
-            member = self.member_dict[name]
+            member = self.members[name]
             db = db_auth.db_name
             member.sources[db].update_values(db_auth)
 
     def get_ids(self, rewrite=False):
-        for member in self.members:
+        for member in self.members.values():
             member.prepare(s=self.s, backoff=True, rewrite=rewrite)
+
+    def compute_keys(self):
+        self.member_keys = dict()
+        for member in self.members.values():
+            target = member.key
+            for db_author in member.sources.values():
+                for key in db_author.iter_keys():
+                    self.member_keys[key] = target
+
+    def get_publications(self):
+        self.publications = dict()
+        self.compute_keys()
+        raw = []
+        for member in self.members.values():
+            raw += member.get_papers(s=self.s, backoff=True)
+
+        raw = [p for p in {a['key']: a for a in raw}.values()]
+
+        p = Process(length_impact=.2)
+        p.fit([p['title'] for p in raw])
+
+        done = np.zeros(len(raw), dtype=bool)
+        for i, paper in enumerate(raw):
+            if done[i]:
+                continue
+            locs = np.where(p.transform([paper['title']], threshold=.9)[0, :] > 9)[0]
+            article = Publication([raw[i] for i in locs])
+            self.publications[article.key] = article
+            done[locs] = True
+
+        aut2pap = defaultdict(set)
+        for k, paper in self.publications.items():
+            for a in paper.authors:
+                for author_id in a.iter_keys():
+                    if author_id in self.member_keys:
+                        aut2pap[self.member_keys[author_id]].add(k)
+
+        for author, papers in aut2pap.items():
+            self.members[author].publications = list(papers)
+
+    def publi_to_text(self, key):
+        paper = self.publications[key]
+        res = paper.title
+        if paper.abstract:
+            res = f"{res}\n{paper.abstract}"
+        return res
+
+    def member_to_text(self, key):
+        member = self.members[self.member_keys[key]]
+        return "\n".join(self.publi_to_text(k) for k in member.publications)
