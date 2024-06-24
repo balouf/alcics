@@ -19,7 +19,7 @@ def unlist(x):
     x: :class:`str` or :class:`int`
         If it's a list, make it flat.
     """
-    return " ".join(x) if isinstance(x, list) else x
+    return x[0] if (isinstance(x, list) and x) else x
 
 
 def get_classes(root, key='name'):

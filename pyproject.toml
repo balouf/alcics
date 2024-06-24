@@ -97,6 +97,9 @@ ignore = [
 
 [tool.coverage.report]
 skip_empty = true
+exclude_also = [
+    "raise NotImplementedError",
+    ]
 
 [tool.coverage.run]
 branch = true
