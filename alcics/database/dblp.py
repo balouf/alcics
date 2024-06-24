@@ -122,7 +122,6 @@ class DBLPAuthor(DBAuthor):
 
     def query_publications(self, s=None):
         """
-
         Parameters
         ----------
         s: :class:`~requests.Session`, optional
@@ -131,7 +130,7 @@ class DBLPAuthor(DBAuthor):
         Returns
         -------
         :class:`list`
-            Papers available in DBLP
+            Papers available in DBLP.
 
         Examples
         --------

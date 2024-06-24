@@ -42,8 +42,9 @@ intersphinx_mapping = {'python':('https://docs.python.org/3', None),
                        'ipython':('https://ipython.readthedocs.io/en/stable/', None),
                        'numpy': ('https://docs.scipy.org/doc/numpy/', None),
                        'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
-                       'matplotlib': ('http://matplotlib.sourceforge.net/', None),
-                       'numba': ('https://numba.readthedocs.io/en/stable/', None)}
+                       'matplotlib': ('https://matplotlib.org/stable/', None),
+                       'numba': ('https://numba.readthedocs.io/en/stable/', None),
+                       'bs4': ('https://beautiful-soup-4.readthedocs.io/en/latest/', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -58,7 +59,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'Analytical Lab Cartography In Computer Science'
+project = 'ALCICS'
 copyright = "2024, Fabien Mathieu"
 author = "Fabien Mathieu"
 

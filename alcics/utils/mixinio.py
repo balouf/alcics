@@ -117,5 +117,14 @@ class MixInIO:
 
 
 class ToyClass(MixInIO):
+    """
+    Used to demonstrate how MixInIO works.
+
+    Parameters
+    ----------
+    value: any
+        Something to store.
+    """
+
     def __init__(self, value=0):
         self.value = value

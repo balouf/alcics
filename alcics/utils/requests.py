@@ -8,7 +8,6 @@ from alcics.utils.logger import logger
 
 def autosession(s):
     """
-
     Parameters
     ----------
     s: :class:`~requests.Session`, optional

@@ -6,7 +6,16 @@ from alcics.utils.logger import logger
 
 
 class Member(LazyRepr):
-
+    """
+    Parameters
+    ----------
+    name: :class:`str`
+        Member name.
+    pid: :class:`str`, optional
+        Unique id (in case of homonyyms in the lab)
+    db_dict: :class:`dict`
+        Publication DBs to use. Default to all available.
+    """
     def __init__(self, name, pid=None, db_dict=None):
         self.name = name
         self.pid = pid
@@ -17,9 +26,29 @@ class Member(LazyRepr):
 
     @property
     def key(self):
+        """
+        :class:`str`
+            Index key of member.
+        """
         return self.pid if self.pid else self.name
 
     def prepare(self, s=None, backoff=False, rewrite=False):
+        """
+        Fetch member identifiers in her databases.
+
+        Parameters
+        ----------
+        s: :class:`~requests.Session`, optional
+            A session (may be None).
+        backoff: :class:`bool`, default=False
+            Wait between queries.
+        rewrite: :class:`bool`, default=False
+            Update even if identifiers are already set.
+
+        Returns
+        -------
+        None
+        """
         for db_author in self.sources.values():
             if rewrite or not db_author.is_set:
                 db_author.populate_id(s)
@@ -27,6 +56,22 @@ class Member(LazyRepr):
                     sleep(db_author.query_id_backoff)
 
     def get_papers(self, s=None, backoff=False):
+        """
+        Fetch publications from databases.
+
+        Parameters
+        ----------
+        s: :class:`~requests.Session`, optional
+            A session (may be None).
+        backoff: :class:`bool`, default=False
+            Wait between queries.
+
+        Returns
+        -------
+        :class:`list`
+            Raw publications.
+            Note that integration of those is made in :meth:`~alcics.lab.lab.Lab.get_publications`,
+        """
         papers = []
         for db_author in self.sources.values():
             if db_author.is_set:

@@ -22,7 +22,9 @@ class HALAuthor(DBAuthor):
     db_name: ClassVar[str] = 'hal'
 
     pid: int = None
+    """Personal Id, an integer that can be used when hal-id is not available."""
     alt_pids: list = field(default_factory=list)
+    """One author has one unique hal-id but possibly multiple Personal Ids. Extra pids should be put here."""
 
     @property
     def url(self):
@@ -135,7 +137,6 @@ class HALAuthor(DBAuthor):
 
     def query_publications(self, s=None):
         """
-
         Parameters
         ----------
         s: :class:`~requests.Session`, optional
@@ -144,7 +145,7 @@ class HALAuthor(DBAuthor):
         Returns
         -------
         :class:`list`
-            Papers available in DBLP
+            Papers available in HAL.
 
         Examples
         --------
