@@ -474,6 +474,88 @@ document.write(`
 <span class="sd">        Names of the lab members.</span>
 <span class="sd">    db_dict: :class:`dict`</span>
 <span class="sd">        Publication DBs to use. Default to all available.</span>
+
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Use a two-people lab for example.</span>
+
+<span class="sd">    &gt;&gt;&gt; mini_lab = Lab([&#39;Fabien Mathieu&#39;, &#39;François Baccelli&#39;])</span>
+
+<span class="sd">    Get DB ids</span>
+
+<span class="sd">    &gt;&gt;&gt; from alcics import HALAuthor, DBLPAuthor</span>
+<span class="sd">    &gt;&gt;&gt; mini_lab.manual_update([HALAuthor(name=&#39;François Baccelli&#39;, id=&#39;francois-baccelli&#39;,</span>
+<span class="sd">    ...                                                     aliases=[&#39;Francois Baccelli&#39;]),</span>
+<span class="sd">    ... DBLPAuthor(name=&#39;François Baccelli&#39;, id=&#39;b/FrancoisBaccelli&#39;),</span>
+<span class="sd">    ... DBLPAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;66/2077&#39;)])</span>
+
+
+<span class="sd">    &gt;&gt;&gt; mini_lab.get_ids()</span>
+<span class="sd">    &gt;&gt;&gt; mini_lab.member_list # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">    [Member(name=&#39;Fabien Mathieu&#39;, sources={&#39;hal&#39;: HALAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;fabien-mathieu&#39;),</span>
+<span class="sd">    &#39;dblp&#39;: DBLPAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;66/2077&#39;)}),</span>
+<span class="sd">    Member(name=&#39;François Baccelli&#39;, sources={&#39;hal&#39;: HALAuthor(name=&#39;François Baccelli&#39;, id=&#39;francois-baccelli&#39;,</span>
+<span class="sd">    aliases=[&#39;Francois Baccelli&#39;]),</span>
+<span class="sd">    &#39;dblp&#39;: DBLPAuthor(name=&#39;François Baccelli&#39;, id=&#39;b/FrancoisBaccelli&#39;)})]</span>
+
+<span class="sd">    There is one entry missing (it was in the warnings). Let us manually set it.</span>
+
+<span class="sd">    Now we fetch publications:</span>
+
+<span class="sd">    &gt;&gt;&gt; mini_lab.get_publications()</span>
+
+<span class="sd">    How many publications per member?</span>
+
+<span class="sd">    &gt;&gt;&gt; [len(a.publications) for a in mini_lab.member_list]</span>
+<span class="sd">    [98, 278]</span>
+
+<span class="sd">    Consider one publication.</span>
+
+<span class="sd">    &gt;&gt;&gt; key = mini_lab.members[&#39;Fabien Mathieu&#39;].publications[0]</span>
+<span class="sd">    &gt;&gt;&gt; publi = mini_lab.publications[key]</span>
+
+<span class="sd">    Use the string property to have a simple bibliography entry:</span>
+
+<span class="sd">    &gt;&gt;&gt; publi.string # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">    &#39;Making most voting systems meet the Condorcet criterion reduces their manipulability,</span>
+<span class="sd">    by François Durand, Fabien Mathieu, Ludovic Noirie. unpublished, 2014.&#39;</span>
+
+<span class="sd">    Use publi_to_text for something more content-oriented:</span>
+
+<span class="sd">    &gt;&gt;&gt; mini_lab.publi_to_text(key) # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">    &#39;Making most voting systems meet the Condorcet criterion reduces their manipulability\\nSince any non-trivial voting</span>
+<span class="sd">    system is susceptible to manipulation, we investigate how it is possible to reduce the set of situations where it is</span>
+<span class="sd">    manipulable, that is, such that a coalition of voters, by casting an insincere ballot, may secure an outcome that is</span>
+<span class="sd">    better from their point of view. We prove that, for a large class of voting systems, a simple modiﬁcation allows to</span>
+<span class="sd">    reduce manipulability. This modiﬁcation is Condorciﬁcation: when there is a Condorcet winner, designate her;</span>
+<span class="sd">    otherwise, use the original rule. Our very general framework allows to do this for any voting system, whatever the</span>
+<span class="sd">    form of the original ballots. Hence, when searching for a voting system whose manipulability is minimal, one can</span>
+<span class="sd">    restrict to those that meet the Condorcet criterion.&#39;</span>
+
+<span class="sd">    Use member_to_text to get the content of a member:</span>
+
+<span class="sd">    &gt;&gt;&gt; mini_lab.member_to_text(&quot;Fabien Mathieu&quot;)[:100]</span>
+<span class="sd">    &#39;Making most voting systems meet the Condorcet criterion reduces their manipulability\\nSince any non-t&#39;</span>
+
+<span class="sd">    &gt;&gt;&gt; from collections import Counter</span>
+<span class="sd">    &gt;&gt;&gt; copublis = [k for k, v in Counter(p for m in mini_lab.members.values() for p in m.publications).items() if v&gt;1]</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;\\n&quot;.join(mini_lab.publications[p].string for p in copublis)) # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">    On Spatial Point Processes with Uniform Births and Deaths by Random Connection,</span>
+<span class="sd">    by François Baccelli, Fabien Mathieu, Ilkka Norros. unpublished, 2014.</span>
+<span class="sd">    Mutual Service Processes in Euclidean Spaces: Existence and Ergodicity,</span>
+<span class="sd">    by François Baccelli, Fabien Mathieu, Ilkka Norros. Queueing Systems, 2017.</span>
+<span class="sd">    Spatial Interactions of Peers and Performance of File Sharing Systems,</span>
+<span class="sd">    by François Baccelli, Fabien Mathieu, Ilkka Norros. unpublished, 2012.</span>
+<span class="sd">    Can P2P Networks be Super-Scalable?,</span>
+<span class="sd">    by François Baccelli, Fabien Mathieu, Ilkka Norros, Rémi Varloot. IEEE Infocom 2013 - 32nd IEEE International</span>
+<span class="sd">    Conference on Computer Communications, 2013.</span>
+<span class="sd">    Supra-extensibilité des réseaux P2P,</span>
+<span class="sd">    by François Baccelli, Fabien Mathieu, Ilkka Norros, Rémi Varloot. 15èmes Rencontres Francophones sur les Aspects</span>
+<span class="sd">    Algorithmiques des Télécommunications (AlgoTel), 2013.</span>
+<span class="sd">    Performance of P2P Networks with Spatial Interactions of Peers,</span>
+<span class="sd">    by François Baccelli, Fabien Mathieu, Ilkka Norros. CoRR, 2011.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">constructor</span> <span class="o">=</span> <span class="n">Member</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class attribute: constructor for members of the lab.&quot;&quot;&quot;</span>
@@ -561,7 +643,7 @@ document.write(`
 
 <div class="viewcode-block" id="Lab.get_publications">
 <a class="viewcode-back" href="../../../reference/lab.html#alcics.lab.lab.Lab.get_publications">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_publications</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_publications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">.9</span><span class="p">,</span> <span class="n">length_impact</span><span class="o">=</span><span class="mf">.2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        * Retrieve all publications from members in their databases</span>
 <span class="sd">        * Remove full duplicates</span>
@@ -580,14 +662,14 @@ document.write(`
 
         <span class="n">raw</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">{</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]:</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">}</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
 
-        <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">length_impact</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">length_impact</span><span class="o">=</span><span class="n">length_impact</span><span class="p">)</span>
         <span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">])</span>
 
         <span class="n">done</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">raw</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">paper</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">done</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
                 <span class="k">continue</span>
-            <span class="n">locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">paper</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]],</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">.9</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">paper</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]],</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">article</span> <span class="o">=</span> <span class="n">Publication</span><span class="p">([</span><span class="n">raw</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">locs</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">publications</span><span class="p">[</span><span class="n">article</span><span class="o">.</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">article</span>
             <span class="n">done</span><span class="p">[</span><span class="n">locs</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
@@ -600,7 +682,7 @@ document.write(`
                         <span class="n">aut2pap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">member_keys</span><span class="p">[</span><span class="n">author_id</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">author</span><span class="p">,</span> <span class="n">papers</span> <span class="ow">in</span> <span class="n">aut2pap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">[</span><span class="n">author</span><span class="p">]</span><span class="o">.</span><span class="n">publications</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">papers</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">[</span><span class="n">author</span><span class="p">]</span><span class="o">.</span><span class="n">publications</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">papers</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Lab.publi_to_text">
