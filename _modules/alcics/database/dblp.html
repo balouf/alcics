@@ -477,7 +477,7 @@ document.write(`
 <span class="k">class</span> <span class="nc">DBLPAuthor</span><span class="p">(</span><span class="n">DBAuthor</span><span class="p">):</span>
     <span class="n">db_name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;dblp&#39;</span>
     <span class="n">query_id_backoff</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">7.0</span>
-    <span class="n">query_papers_backoff</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
+    <span class="n">query_publications_backoff</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -518,6 +518,9 @@ document.write(`
             <span class="n">t</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">t</span><span class="p">:</span>
                 <span class="n">res</span><span class="p">[</span><span class="s1">&#39;venue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span><span class="p">[</span><span class="s1">&#39;venue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;unpublished&#39;</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;authors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">DBLPAuthor</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;pid&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
                           <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)]</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;dblp&#39;</span>
@@ -578,9 +581,9 @@ document.write(`
                 <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">soup</span><span class="p">(</span><span class="s1">&#39;hit&#39;</span><span class="p">)]</span></div>
 
 
-<div class="viewcode-block" id="DBLPAuthor.query_papers">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.dblp.DBLPAuthor.query_papers">[docs]</a>
-    <span class="k">def</span> <span class="nf">query_papers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DBLPAuthor.query_publications">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.dblp.DBLPAuthor.query_publications">[docs]</a>
+    <span class="k">def</span> <span class="nf">query_publications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
@@ -597,9 +600,9 @@ document.write(`
 <span class="sd">        --------</span>
 
 <span class="sd">        &gt;&gt;&gt; fabien = DBLPAuthor(&#39;Fabien Mathieu&#39;, id=&#39;66/2077&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; papers = sorted(fabien.query_papers(),</span>
+<span class="sd">        &gt;&gt;&gt; publications = sorted(fabien.query_publications(),</span>
 <span class="sd">        ...                 key=lambda p: p[&#39;title&#39;])</span>
-<span class="sd">        &gt;&gt;&gt; papers[0] # doctest:  +NORMALIZE_WHITESPACE</span>
+<span class="sd">        &gt;&gt;&gt; publications[0] # doctest:  +NORMALIZE_WHITESPACE</span>
 <span class="sd">        {&#39;type&#39;: &#39;conference&#39;, &#39;key&#39;: &#39;conf/iptps/BoufkhadMMPV08&#39;,</span>
 <span class="sd">        &#39;url&#39;: &#39;https://dblp.org/rec/conf/iptps/BoufkhadMMPV08.html&#39;,</span>
 <span class="sd">        &#39;title&#39;: &#39;Achievable catalog size in peer-to-peer video-on-demand systems.&#39;,</span>
@@ -607,7 +610,7 @@ document.write(`
 <span class="sd">        &#39;authors&#39;: [DBLPAuthor(name=&#39;Yacine Boufkhad&#39;, id=&#39;75/5742&#39;), DBLPAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;66/2077&#39;),</span>
 <span class="sd">        DBLPAuthor(name=&#39;Fabien de Montgolfier&#39;, id=&#39;57/6313&#39;), DBLPAuthor(name=&#39;Diego Perino&#39;, id=&#39;03/3645&#39;),</span>
 <span class="sd">        DBLPAuthor(name=&#39;Laurent Viennot&#39;, id=&#39;v/LaurentViennot&#39;)], &#39;origin&#39;: &#39;dblp&#39;}</span>
-<span class="sd">        &gt;&gt;&gt; papers[-1] # doctest:  +NORMALIZE_WHITESPACE</span>
+<span class="sd">        &gt;&gt;&gt; publications[-1] # doctest:  +NORMALIZE_WHITESPACE</span>
 <span class="sd">        {&#39;type&#39;: &#39;conference&#39;, &#39;key&#39;: &#39;conf/sss/Mathieu07&#39;,</span>
 <span class="sd">        &#39;url&#39;: &#39;https://dblp.org/rec/conf/sss/Mathieu07.html&#39;,</span>
 <span class="sd">        &#39;title&#39;: &#39;Upper Bounds for Stabilization in Acyclic Preference-Based Systems.&#39;,</span>

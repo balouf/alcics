@@ -520,6 +520,8 @@ document.write(`
             <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
                 <span class="n">res</span><span class="p">[</span><span class="s1">&#39;venue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
                 <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span><span class="p">[</span><span class="s1">&#39;venue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;unpublished&#39;</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">HAL_TYPES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hal&#39;</span>
         <span class="k">return</span> <span class="n">res</span></div>
@@ -592,9 +594,9 @@ document.write(`
             <span class="p">[</span><span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="n">clean_aliases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pids</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span></div>
 
 
-<div class="viewcode-block" id="HALAuthor.query_papers">
-<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.query_papers">[docs]</a>
-    <span class="k">def</span> <span class="nf">query_papers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="HALAuthor.query_publications">
+<a class="viewcode-back" href="../../../reference/database.html#alcics.database.hal.HALAuthor.query_publications">[docs]</a>
+    <span class="k">def</span> <span class="nf">query_publications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
@@ -611,9 +613,9 @@ document.write(`
 <span class="sd">        --------</span>
 
 <span class="sd">        &gt;&gt;&gt; fabien = HALAuthor(name=&#39;Fabien&#39;, id=&#39;fabien-mathieu&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; papers = sorted(fabien.query_papers(),</span>
+<span class="sd">        &gt;&gt;&gt; publications = sorted(fabien.query_publications(),</span>
 <span class="sd">        ...                 key=lambda p: p[&#39;title&#39;])</span>
-<span class="sd">        &gt;&gt;&gt; papers[2] # doctest:  +NORMALIZE_WHITESPACE</span>
+<span class="sd">        &gt;&gt;&gt; publications[2] # doctest:  +NORMALIZE_WHITESPACE</span>
 <span class="sd">        {&#39;title&#39;: &#39;Achievable Catalog Size in Peer-to-Peer Video-on-Demand Systems&#39;,</span>
 <span class="sd">        &#39;abstract&#39;: &#39;We analyze a system where $n$ set-top boxes with same upload and storage capacities collaborate to</span>
 <span class="sd">        serve $r$ videos simultaneously (a typical value is $r=n$). We give upper and lower bounds on the catalog size</span>
@@ -630,7 +632,7 @@ document.write(`
 <span class="sd">        HALAuthor(name=&#39;Diego Perino&#39;),</span>
 <span class="sd">        HALAuthor(name=&#39;Laurent Viennot&#39;, id=&#39;laurentviennot&#39;, pid=1841)],</span>
 <span class="sd">        &#39;venue&#39;: &#39;Proceedings of the 7th Internnational Workshop on Peer-to-Peer Systems (IPTPS)&#39;, &#39;origin&#39;: &#39;hal&#39;}</span>
-<span class="sd">        &gt;&gt;&gt; papers[-7] # doctest:  +NORMALIZE_WHITESPACE</span>
+<span class="sd">        &gt;&gt;&gt; publications[-7] # doctest:  +NORMALIZE_WHITESPACE</span>
 <span class="sd">        {&#39;title&#39;: &#39;Upper bounds for stabilization in acyclic preference-based systems&#39;,</span>
 <span class="sd">        &#39;abstract&#39;: &#39;Preference-based systems (p.b.s.) describe interactions between nodes of a system that can rank</span>
 <span class="sd">        their neighbors. Previous work has shown that p.b.s. converge to a unique locally stable matching if an</span>
@@ -651,19 +653,19 @@ document.write(`
 <span class="sd">        &gt;&gt;&gt; emilios # doctest: +NORMALIZE_WHITESPACE</span>
 <span class="sd">        [HALAuthor(name=&#39;Emilio Calvanese&#39;, aliases=[&#39;Emilio Calvanese Strinati&#39;], pid=911234),</span>
 <span class="sd">        HALAuthor(name=&#39;Emilio Calvanese&#39;, aliases=[&#39;Emilio Calvanese Strinati&#39;], pid=1301052)]</span>
-<span class="sd">        &gt;&gt;&gt; len(emilios[0].query_papers())</span>
+<span class="sd">        &gt;&gt;&gt; len(emilios[0].query_publications())</span>
 <span class="sd">        9</span>
-<span class="sd">        &gt;&gt;&gt; len(emilios[1].query_papers())</span>
+<span class="sd">        &gt;&gt;&gt; len(emilios[1].query_publications())</span>
 <span class="sd">        3</span>
-<span class="sd">        &gt;&gt;&gt; len(HALAuthor(&#39;Emilio&#39;, pid=911234, alt_pids=[1301052]).query_papers())</span>
+<span class="sd">        &gt;&gt;&gt; len(HALAuthor(&#39;Emilio&#39;, pid=911234, alt_pids=[1301052]).query_publications())</span>
 <span class="sd">        12</span>
 
 <span class="sd">        Note: an error is raised if not enough data is provided</span>
 
-<span class="sd">        &gt;&gt;&gt; HALAuthor(&#39;Fabien Mathieu&#39;).query_papers()</span>
+<span class="sd">        &gt;&gt;&gt; HALAuthor(&#39;Fabien Mathieu&#39;).query_publications()</span>
 <span class="sd">        Traceback (most recent call last):</span>
 <span class="sd">        ...</span>
-<span class="sd">        ValueError: HALAuthor(name=&#39;Fabien Mathieu&#39;) must have id or pid for papers to be fetched.</span>
+<span class="sd">        ValueError: HALAuthor(name=&#39;Fabien Mathieu&#39;) must have id or pid for publications to be fetched.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">autosession</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="n">api</span> <span class="o">=</span> <span class="s2">&quot;https://api.archives-ouvertes.fr/search/&quot;</span>
@@ -675,12 +677,12 @@ document.write(`
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="p">:</span>
             <span class="n">params</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;authIdPerson_i:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> must have id or pid for papers to be fetched.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2"> must have id or pid for publications to be fetched.&quot;</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">auto_retry_get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">api</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
         <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_entry</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span> <span class="p">[])]</span>
         <span class="k">for</span> <span class="n">alt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alt_pids</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">+=</span> <span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="n">alt</span><span class="p">)</span><span class="o">.</span><span class="n">query_papers</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="n">alt</span><span class="p">)</span><span class="o">.</span><span class="n">query_publications</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 </div>
 

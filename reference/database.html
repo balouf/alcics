@@ -543,8 +543,8 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.query_papers">
-<span class="sig-name descname"><span class="pre">query_papers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/dblp.html#DBLPAuthor.query_papers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.query_papers" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="alcics.database.dblp.DBLPAuthor.query_publications">
+<span class="sig-name descname"><span class="pre">query_publications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/dblp.html#DBLPAuthor.query_publications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.dblp.DBLPAuthor.query_publications" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
@@ -558,9 +558,9 @@ document.write(`
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fabien</span> <span class="o">=</span> <span class="n">DBLPAuthor</span><span class="p">(</span><span class="s1">&#39;Fabien Mathieu&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;66/2077&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">papers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fabien</span><span class="o">.</span><span class="n">query_papers</span><span class="p">(),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">publications</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fabien</span><span class="o">.</span><span class="n">query_publications</span><span class="p">(),</span>
 <span class="gp">... </span>                <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">papers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">publications</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
 <span class="go">{&#39;type&#39;: &#39;conference&#39;, &#39;key&#39;: &#39;conf/iptps/BoufkhadMMPV08&#39;,</span>
 <span class="go">&#39;url&#39;: &#39;https://dblp.org/rec/conf/iptps/BoufkhadMMPV08.html&#39;,</span>
 <span class="go">&#39;title&#39;: &#39;Achievable catalog size in peer-to-peer video-on-demand systems.&#39;,</span>
@@ -568,7 +568,7 @@ document.write(`
 <span class="go">&#39;authors&#39;: [DBLPAuthor(name=&#39;Yacine Boufkhad&#39;, id=&#39;75/5742&#39;), DBLPAuthor(name=&#39;Fabien Mathieu&#39;, id=&#39;66/2077&#39;),</span>
 <span class="go">DBLPAuthor(name=&#39;Fabien de Montgolfier&#39;, id=&#39;57/6313&#39;), DBLPAuthor(name=&#39;Diego Perino&#39;, id=&#39;03/3645&#39;),</span>
 <span class="go">DBLPAuthor(name=&#39;Laurent Viennot&#39;, id=&#39;v/LaurentViennot&#39;)], &#39;origin&#39;: &#39;dblp&#39;}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">papers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">publications</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
 <span class="go">{&#39;type&#39;: &#39;conference&#39;, &#39;key&#39;: &#39;conf/sss/Mathieu07&#39;,</span>
 <span class="go">&#39;url&#39;: &#39;https://dblp.org/rec/conf/sss/Mathieu07.html&#39;,</span>
 <span class="go">&#39;title&#39;: &#39;Upper Bounds for Stabilization in Acyclic Preference-Based Systems.&#39;,</span>
@@ -650,8 +650,8 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.query_papers">
-<span class="sig-name descname"><span class="pre">query_papers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/hal.html#HALAuthor.query_papers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.hal.HALAuthor.query_papers" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="alcics.database.hal.HALAuthor.query_publications">
+<span class="sig-name descname"><span class="pre">query_publications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/alcics/database/hal.html#HALAuthor.query_publications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#alcics.database.hal.HALAuthor.query_publications" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Session</span></code>, optional) – Session.</p>
@@ -665,9 +665,9 @@ document.write(`
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fabien</span> <span class="o">=</span> <span class="n">HALAuthor</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Fabien&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;fabien-mathieu&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">papers</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fabien</span><span class="o">.</span><span class="n">query_papers</span><span class="p">(),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">publications</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fabien</span><span class="o">.</span><span class="n">query_publications</span><span class="p">(),</span>
 <span class="gp">... </span>                <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">papers</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">publications</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> 
 <span class="go">{&#39;title&#39;: &#39;Achievable Catalog Size in Peer-to-Peer Video-on-Demand Systems&#39;,</span>
 <span class="go">&#39;abstract&#39;: &#39;We analyze a system where $n$ set-top boxes with same upload and storage capacities collaborate to</span>
 <span class="go">serve $r$ videos simultaneously (a typical value is $r=n$). We give upper and lower bounds on the catalog size</span>
@@ -684,7 +684,7 @@ document.write(`
 <span class="go">HALAuthor(name=&#39;Diego Perino&#39;),</span>
 <span class="go">HALAuthor(name=&#39;Laurent Viennot&#39;, id=&#39;laurentviennot&#39;, pid=1841)],</span>
 <span class="go">&#39;venue&#39;: &#39;Proceedings of the 7th Internnational Workshop on Peer-to-Peer Systems (IPTPS)&#39;, &#39;origin&#39;: &#39;hal&#39;}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">papers</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">]</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">publications</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">]</span> 
 <span class="go">{&#39;title&#39;: &#39;Upper bounds for stabilization in acyclic preference-based systems&#39;,</span>
 <span class="go">&#39;abstract&#39;: &#39;Preference-based systems (p.b.s.) describe interactions between nodes of a system that can rank</span>
 <span class="go">their neighbors. Previous work has shown that p.b.s. converge to a unique locally stable matching if an</span>
@@ -705,19 +705,19 @@ document.write(`
 <span class="gp">&gt;&gt;&gt; </span><span class="n">emilios</span> 
 <span class="go">[HALAuthor(name=&#39;Emilio Calvanese&#39;, aliases=[&#39;Emilio Calvanese Strinati&#39;], pid=911234),</span>
 <span class="go">HALAuthor(name=&#39;Emilio Calvanese&#39;, aliases=[&#39;Emilio Calvanese Strinati&#39;], pid=1301052)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">emilios</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">query_papers</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">emilios</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">query_publications</span><span class="p">())</span>
 <span class="go">9</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">emilios</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">query_papers</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">emilios</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">query_publications</span><span class="p">())</span>
 <span class="go">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">HALAuthor</span><span class="p">(</span><span class="s1">&#39;Emilio&#39;</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="mi">911234</span><span class="p">,</span> <span class="n">alt_pids</span><span class="o">=</span><span class="p">[</span><span class="mi">1301052</span><span class="p">])</span><span class="o">.</span><span class="n">query_papers</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">HALAuthor</span><span class="p">(</span><span class="s1">&#39;Emilio&#39;</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="mi">911234</span><span class="p">,</span> <span class="n">alt_pids</span><span class="o">=</span><span class="p">[</span><span class="mi">1301052</span><span class="p">])</span><span class="o">.</span><span class="n">query_publications</span><span class="p">())</span>
 <span class="go">12</span>
 </pre></div>
 </div>
 <p>Note: an error is raised if not enough data is provided</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HALAuthor</span><span class="p">(</span><span class="s1">&#39;Fabien Mathieu&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">query_papers</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HALAuthor</span><span class="p">(</span><span class="s1">&#39;Fabien Mathieu&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">query_publications</span><span class="p">()</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="c">...</span>
-<span class="gr">ValueError</span>: <span class="n">HALAuthor(name=&#39;Fabien Mathieu&#39;) must have id or pid for papers to be fetched.</span>
+<span class="gr">ValueError</span>: <span class="n">HALAuthor(name=&#39;Fabien Mathieu&#39;) must have id or pid for publications to be fetched.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -790,13 +790,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.parse_entry()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_id()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_papers"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_papers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.dblp.DBLPAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">DBLPAuthor.query_publications()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor"><code class="docutils literal notranslate"><span class="pre">HALAuthor</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.parse_entry"><code class="docutils literal notranslate"><span class="pre">HALAuthor.parse_entry()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_id"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_id()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_papers"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_papers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.HALAuthor.query_publications"><code class="docutils literal notranslate"><span class="pre">HALAuthor.query_publications()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcics.database.hal.parse_facet_author"><code class="docutils literal notranslate"><span class="pre">parse_facet_author()</span></code></a></li>
