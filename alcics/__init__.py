@@ -9,3 +9,6 @@ from alcics.database.dblp import DBLPAuthor
 from alcics.lab.lab import Lab
 from alcics.lab.member import Member
 from alcics.lab.publication import Publication
+from alcics.utils.common import get_classes
+
+from alcics.gismo import make_gismo
