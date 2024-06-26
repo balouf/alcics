@@ -6,6 +6,18 @@ from gismo.gismo import Gismo
 
 
 def make_post_publi(lab):
+    """
+    Hook to turn publication key stored in a corpus into actual publication.
+
+    Parameters
+    ----------
+    lab: :class:`~alcics.lab.lab.Lab`
+        Lab that contains the corpus publications.
+
+    Returns
+    -------
+    callable
+    """
     def to_bib(g, i):
         item = g.corpus[i]
         return lab.publications[item]
@@ -13,6 +25,21 @@ def make_post_publi(lab):
 
 
 def make_gismo(lab, vectorizer_parameters=None):
+    """
+    Makes a gismo out of a lab.
+
+    Parameters
+    ----------
+    lab: :class:`~alcics.lab.lab.Lab`
+        Lab that contains publications.
+    vectorizer_parameters: :class:`dict`
+        Overriding parameters for the Countvectorizer of the gismo.
+
+    Returns
+    -------
+    gismo: :class:`~gismo.gismo.Gismo`
+        Gismo of the lab.
+    """
     parameters = {'ngram_range': (1, 3),
                              'dtype': float,
                              'stop_words': sw,

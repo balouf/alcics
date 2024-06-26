@@ -44,7 +44,8 @@ intersphinx_mapping = {'python':('https://docs.python.org/3', None),
                        'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
                        'matplotlib': ('https://matplotlib.org/stable/', None),
                        'numba': ('https://numba.readthedocs.io/en/stable/', None),
-                       'bs4': ('https://beautiful-soup-4.readthedocs.io/en/latest/', None)}
+                       'bs4': ('https://beautiful-soup-4.readthedocs.io/en/latest/', None),
+                       'gismo': ('https://balouf.github.io/gismo/', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -12,3 +12,4 @@ from alcics.lab.publication import Publication
 from alcics.utils.common import get_classes
 
 from alcics.gismo import make_gismo
+from alcics.search import Search, SearchDocuments, SearchLandmarks, SearchFeatures, search_to_html, search_to_text
