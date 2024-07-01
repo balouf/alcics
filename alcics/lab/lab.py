@@ -54,7 +54,7 @@ class Lab(MixInIO):
     How many publications per member?
 
     >>> [len(a.publications) for a in mini_lab.member_list]
-    [98, 278]
+    [98, 279]
 
     Consider one publication.
 
